@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'works','Work form')}"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<body>
+<div class="row" style="margin-top: 50px" ;>
+    <div class="col-md-2 text-center"></div>
+    <div class="col-md-8 text-center">
+        <div class="card">
+            <div class="card-header">
+                Add or update work
+            </div>
+            <div class="card-body">
+
+                <form th:action="@{/works/new}" th:object="${work}" method="POST">
+                    <input type="hidden" th:field="*{id}" th:value="${work.id}">
+                    <div class="form-group row">
+                        <label for="name" class="col-md-3 col-form-label">Name</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" th:field="*{name}" placeholder="Name">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="price" class="col-md-3 col-form-label">Price</label>
+                        <div class="col-md-9">
+                            <input type="number" class="form-control" th:field="*{price}" placeholder="Price">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="duration" class="col-md-3 col-form-label">Duration</label>
+                        <div class="col-md-9">
+                            <input type="number" class="form-control" th:field="*{duration}" placeholder="Duration">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="duration" class="col-md-3 col-form-label">Description</label>
+                        <div class="col-md-9">
+                                <textarea class="form-control" th:field="*{description}" rows="3"
+                                          placeholder="Description"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <legend class="col-form-label col-md-3 pt-0">Target customer</legend>
+                        <div class="col-md-9">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="targetCustomer" id="retail"
+                                       value="retail"
+                                       th:checked="*{targetCustomer =='retail' or targetCustomer== null}">
+                                <label class="form-check-label" for="retail">Retail</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="targetCustomer" id="corporate"
+                                       value="corporate" th:checked="*{targetCustomer=='corporate'}">
+                                <label class="form-check-label" for="corporate">Corporate</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <legend class="col-form-label col-md-3 pt-0">Cancelable by customer?</legend>
+                        <div class="col-md-9">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="editable" id="option1" value="1"
+                                       th:checked="*{editable}">
+                                <label class="form-check-label" for="option1">Yes</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="editable" id="option2" value="0"
+                                       th:checked="*{editable == false}">
+                                <label class="form-check-label" for="option2">No</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group text-center">
+
+                        <button type="submit" class="btn btn-primary">Save</button>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8 text-center"></div>
+</div>
+</body>
+
+</html>
