@@ -23,6 +23,7 @@ public class CommandHandlerProcess
                 return handler;
             }
         }
+
         throw new Exception("the command cannot be handled");
     }
 }

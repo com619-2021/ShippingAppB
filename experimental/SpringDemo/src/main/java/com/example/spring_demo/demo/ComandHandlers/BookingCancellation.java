@@ -1,18 +1,18 @@
 package com.example.spring_demo.demo.ComandHandlers;
 
-import com.example.spring_demo.demo.ComandHandlers.Helpers.BookingShipHelper;
 import com.example.spring_demo.demo.IRestCallHandler;
 
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class BookShipCommandHandler implements IRestCallHandler
+public class BookingCancellation implements IRestCallHandler
 {
+    // TODO when the booking reference is confirmed, the regex could be improved.
     /**
-     * The regular expression for checking the command is handleable.
+     * The regular expression used to check the command is handleable.
      */
-    private String commandRegex = "^bookship:number_of_passengers:(\\d+),cargo:([a-z]+),weight_in_kg:(\\d+).(\\d\\d)$";
+    private final String commandRegex = "^cancel:$";
 
     /**
      * Checks if the command can be handled by this handler.
@@ -35,9 +35,7 @@ public class BookShipCommandHandler implements IRestCallHandler
     @Override
     public String handle(String command)
     {
-        var bookingData = BookingShipHelper.ExtractData(command);
-
-        final String successMessage = "200";
-        return String.format(successMessage);
+        // TODO implement.
+        return null;
     }
 }
