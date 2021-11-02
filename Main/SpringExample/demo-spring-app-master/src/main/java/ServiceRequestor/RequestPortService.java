@@ -11,13 +11,12 @@ public class RequestPortService
 
     private HttpURLConnection httpURLConnection;
 
+    public RequestPortService() throws MalformedURLException
+    {
+    }
+
     public void Connect() throws IOException
     {
         this.httpURLConnection = (HttpURLConnection)portUrl.openConnection();
-    }
-
-    public String RequestPortService() throws MalformedURLException
-    {
-
     }
 }
