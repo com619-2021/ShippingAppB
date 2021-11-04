@@ -5,25 +5,25 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class PortServiceCaller
+public class ServiceCaller
 {
     /**
      * Initializes a new instances of the PortServiceCaller class.
      * @throws MalformedURLException
      */
-    public PortServiceCaller() throws MalformedURLException
+    public ServiceCaller() throws MalformedURLException
     {
 
     }
 
     /**
-     * This sends the get request for port availability
+     * This sends a get request to the provided url
      * @param url the url to request.
      * @param parameters the parameters for the rest request.
-     * @return availability of the ports.
+     * @return the result of the get request.
      * @throws IOException
      */
-    public String getPortAvailability(URL url, String parameters) throws IOException
+    public String get(URL url, String parameters) throws IOException
     {
         var httpConnectionHandler = new HttpConnectionHandler(url);
         var contentType = "application.json";
@@ -45,13 +45,13 @@ public class PortServiceCaller
     }
 
     /**
-     * books the port
+     * sends a post request to the provided url
      * @param url the url of the post request
-     * @param parameters the parameters used to book the port
-     * @return
+     * @param parameters the parameters used for the post request
+     * @return the object returned by the post request
      * @throws IOException
      */
-    public String postPortBooking(URL url, String parameters) throws IOException
+    public String post(URL url, String parameters) throws IOException
     {
         var httpConnectionHandler = new HttpConnectionHandler(url);
         var contentType = "application.json";

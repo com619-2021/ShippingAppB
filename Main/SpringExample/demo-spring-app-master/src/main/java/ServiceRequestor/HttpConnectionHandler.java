@@ -31,7 +31,7 @@ public class HttpConnectionHandler
     {
         this.connection = (HttpURLConnection) url.openConnection();
         this.connection.setDoOutput(true);
-        this.connection.setRequestMethod("GET");
+        this.connection.setRequestMethod("POST");
         this.connection.setRequestProperty("Content-Type", contentType);
         return this.connection;
     }
