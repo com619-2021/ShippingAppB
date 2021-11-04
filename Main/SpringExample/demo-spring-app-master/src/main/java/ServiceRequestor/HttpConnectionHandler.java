@@ -9,7 +9,16 @@ import java.nio.charset.StandardCharsets;
 
 public class HttpConnectionHandler
 {
-    public static HttpURLConnection httpConnectGet(URL url, String contentType) throws IOException
+    private final URL url;
+    
+    private HttpURLConnection connection;
+
+    public HttpConnectionHandler(URL url)
+    {
+        this.url = url;
+    }
+
+    public HttpURLConnection httpConnectGet(URL url, String contentType) throws IOException
     {
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setDoOutput(true);
@@ -18,32 +27,32 @@ public class HttpConnectionHandler
         return conn;
     }
 
-    public static HttpURLConnection httpConnectPost(URL url, String contentType) throws IOException
+    public HttpURLConnection httpConnectPost(String contentType) throws IOException
     {
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setDoOutput(true);
-        conn.setRequestMethod("GET");
-        conn.setRequestProperty("Content-Type", contentType);
-        return conn;
+        this.connection = (HttpURLConnection) url.openConnection();
+        this.connection.setDoOutput(true);
+        this.connection.setRequestMethod("GET");
+        this.connection.setRequestProperty("Content-Type", contentType);
+        return this.connection;
     }
 
-    public static void disconnectHttp(HttpURLConnection connection)
+    public void disconnectHttp()
     {
         connection.disconnect();
     }
 
-    public static void writeToOutputStream(HttpURLConnection conn, String input) throws IOException
+    public void writeToOutputStream(String input) throws IOException
     {
-        var os = conn.getOutputStream();
+        var os = this.connection.getOutputStream();
         os.write(input.getBytes(StandardCharsets.UTF_8));
         os.flush();
     }
 
-    public static String readBuffer(HttpURLConnection conn) throws IOException
+    public String readBuffer() throws IOException
     {
-        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        BufferedReader br = new BufferedReader(new InputStreamReader(this.connection.getInputStream()));
         var output = "";
-        while(br.readLine() != null)
+        while (br.readLine() != null)
         {
             output += br.readLine();
             //// TODO log output

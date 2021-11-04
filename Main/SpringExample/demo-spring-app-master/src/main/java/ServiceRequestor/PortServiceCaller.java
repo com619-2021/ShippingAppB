@@ -25,10 +25,12 @@ public class PortServiceCaller
      */
     public String getPortAvailability(URL url, String parameters) throws IOException
     {
-        var conn = HttpConnectionHandler.httpConnectGet(url, "application.json");
+        var httpConnectionHandler = new HttpConnectionHandler(url);
+        var contentType = "application.json";
+        var conn = httpConnectionHandler.httpConnectGet(url, contentType);
         var input = parameters;
 
-        HttpConnectionHandler.writeToOutputStream(conn, input);
+        httpConnectionHandler.writeToOutputStream(input);
 
         if(conn.getResponseCode() != HttpURLConnection.HTTP_CREATED)
         {
@@ -36,11 +38,35 @@ public class PortServiceCaller
             throw new RuntimeException("failed: HTTP error code: "+ conn.getResponseCode());
         }
 
-        var output = HttpConnectionHandler.readBuffer(conn);
+        var output = httpConnectionHandler.readBuffer();
 
-        HttpConnectionHandler.disconnectHttp(conn);
+        httpConnectionHandler.disconnectHttp();
         return output;
     }
 
+    /**
+     * books the port
+     * @param url the url of the post request
+     * @param parameters the parameters used to book the port
+     * @return
+     * @throws IOException
+     */
+    public String postPortBooking(URL url, String parameters) throws IOException
+    {
+        var httpConnectionHandler = new HttpConnectionHandler(url);
+        var contentType = "application.json";
+        var conn = httpConnectionHandler.httpConnectPost(contentType);
 
+        httpConnectionHandler.writeToOutputStream(parameters);
+        if(conn.getResponseCode() != HttpURLConnection.HTTP_CREATED)
+        {
+            //// TODO log the error
+            throw new RuntimeException("failed: HTTP error code: "+ conn.getResponseCode());
+        }
+
+        var output = httpConnectionHandler.readBuffer();
+
+        httpConnectionHandler.disconnectHttp();
+        return output;
+    }
 }
