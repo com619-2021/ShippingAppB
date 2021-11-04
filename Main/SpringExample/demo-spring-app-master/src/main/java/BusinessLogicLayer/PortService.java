@@ -1,5 +1,6 @@
 package BusinessLogicLayer;
 
+import ServiceRequestor.PortServiceCallerHelper;
 import org.apache.commons.lang3.NotImplementedException;
 
 import java.time.LocalDate;
@@ -46,6 +47,9 @@ public class PortService
         var shipWidthStr = String.valueOf(shipWidth);
         var dateTimeFormatter = DateTimeFormatter.ofPattern("dd-mm-yyy");
         var dateStr = dateTimeFormatter.format(this.dayOfBooking);
+
+        var params = PortServiceCallerHelper.buildPortAvailabilityParams(shipDraftStr, shipLengthStr, shipWidthStr,
+                dateStr);
 
         throw new NotImplementedException();
     }
