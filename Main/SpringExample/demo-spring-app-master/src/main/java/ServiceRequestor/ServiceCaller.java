@@ -2,20 +2,10 @@ package ServiceRequestor;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
-public class ServiceCaller
+public class ServiceCaller implements IServiceCaller
 {
-    /**
-     * Initializes a new instances of the PortServiceCaller class.
-     * @throws MalformedURLException
-     */
-    public ServiceCaller() throws MalformedURLException
-    {
-
-    }
-
     /**
      * This sends a get request to the provided url
      * @param url the url to request.
@@ -23,7 +13,8 @@ public class ServiceCaller
      * @return the result of the get request.
      * @throws IOException
      */
-    public String get(URL url, String parameters) throws IOException
+    @Override
+    public String getRequest(URL url, String parameters) throws IOException
     {
         var httpConnectionHandler = new HttpConnectionHandler(url);
         var contentType = "application.json";
@@ -51,7 +42,8 @@ public class ServiceCaller
      * @return the object returned by the post request
      * @throws IOException
      */
-    public String post(URL url, String parameters) throws IOException
+    @Override
+    public String postRequest(URL url, String parameters) throws IOException
     {
         var httpConnectionHandler = new HttpConnectionHandler(url);
         var contentType = "application.json";
