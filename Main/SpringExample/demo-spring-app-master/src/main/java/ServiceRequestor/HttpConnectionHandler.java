@@ -56,7 +56,6 @@ public class HttpConnectionHandler
         {
             output += br.readLine();
             //// TODO log output
-            //// TODO handle the output.
         }
 
         return output;

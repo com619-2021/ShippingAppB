@@ -12,7 +12,7 @@ public interface IServiceCaller
      * @return the result of the get request.
      * @throws IOException
      */
-    String getRequest(URL url, String parameters) throws IOException;
+    String getRequest(String parameters) throws IOException;
 
     /**
      * sends a post request to the provided url
@@ -21,5 +21,5 @@ public interface IServiceCaller
      * @return the object returned by the post request
      * @throws IOException
      */
-    String postRequest(URL url, String parameters) throws IOException;
+    String postRequest(String parameters) throws IOException;
 }

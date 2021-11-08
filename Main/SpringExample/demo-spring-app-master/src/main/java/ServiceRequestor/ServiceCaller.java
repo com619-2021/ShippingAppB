@@ -7,14 +7,26 @@ import java.net.URL;
 public class ServiceCaller implements IServiceCaller
 {
     /**
+     * the url to communicate to
+     */
+    private final URL url;
+
+    /**
+     * Initializes a new instance of the ServiceCaller class.
+     * @param url the url to communicate over.
+     */
+    public ServiceCaller(URL url)
+    {
+        this.url = url;
+    }
+    /**
      * This sends a get request to the provided url
-     * @param url the url to request.
      * @param parameters the parameters for the rest request.
      * @return the result of the get request.
      * @throws IOException
      */
     @Override
-    public String getRequest(URL url, String parameters) throws IOException
+    public String getRequest(String parameters) throws IOException
     {
         var httpConnectionHandler = new HttpConnectionHandler(url);
         var contentType = "application.json";
@@ -37,13 +49,12 @@ public class ServiceCaller implements IServiceCaller
 
     /**
      * sends a post request to the provided url
-     * @param url the url of the post request
      * @param parameters the parameters used for the post request
      * @return the object returned by the post request
-     * @throws IOException
+     * @throws IOException url may not be correct
      */
     @Override
-    public String postRequest(URL url, String parameters) throws IOException
+    public String postRequest(String parameters) throws IOException
     {
         var httpConnectionHandler = new HttpConnectionHandler(url);
         var contentType = "application.json";
