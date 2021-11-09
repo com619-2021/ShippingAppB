@@ -18,12 +18,48 @@ public class Ship
     /**
      * The day the shipment is due
      */
-    private final LocalDate dayOfBooking;
+    private final String dayOfBooking;
 
     /**
      * the vertical distance between the waterline and the bottom of the hull
      */
     private final double shipDraft;
+
+    /**
+     * Gets the ships length
+     * @return the ships' length meters
+     */
+    public double getShipLength()
+    {
+        return shipLength;
+    }
+
+    /**
+     * Gets the ships width
+     * @return the ships' width meters
+     */
+    public double getShipWidth()
+    {
+        return shipWidth;
+    }
+
+    /**
+     * Gets the day the ship is due
+     * @return the day the ship is due
+     */
+    public String getDayOfBooking()
+    {
+        return dayOfBooking;
+    }
+
+    /**
+     * Gets the ships draft
+     * @return the ships' draft meters
+     */
+    public double getShipDraft()
+    {
+        return shipDraft;
+    }
 
     /**
      * Initializes a new instance of the Ship class.
@@ -37,6 +73,6 @@ public class Ship
         this.shipDraft = shipDraft;
         this.shipLength = shipLength;
         this.shipWidth = shipWidth;
-        this.dayOfBooking = dayOfBooking;
+        this.dayOfBooking = dayOfBooking.toString();
     }
 }
