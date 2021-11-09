@@ -2,10 +2,12 @@ package ServiceRequestor.tests;
 
 import BusinessLogicLayer.JsonParser;
 import BusinessLogicLayer.RestfulObjects.Ship;
+import BusinessLogicLayer.UrlConfig;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.jupiter.api.Test;
 import org.springframework.util.Assert;
 
+import java.io.IOException;
 import java.time.LocalDate;
 
 public class JsonParserTests
@@ -19,5 +21,15 @@ public class JsonParserTests
         var expected = "{\"shipLength\":678.3,\"shipWidth\":67.0,\"dayOfBooking\":\"2021-05-12\",\"shipDraft\":34.5}";
 
         Assert.isTrue(actual.equals(expected), "actual: " + actual);
+    }
+
+    @Test
+    public void LoadConfigTest() throws IOException
+    {
+        //// TODO test this works on unix
+        var actual = JsonParser.loadConfig();
+        var expected = new UrlConfig("test");
+
+        Assert.isTrue(expected.getPortAvailabilityUrl().equals(actual.getPortAvailabilityUrl()), "actual: port availability url: " + actual.getPortAvailabilityUrl());
     }
 }

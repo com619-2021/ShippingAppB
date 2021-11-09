@@ -2,7 +2,6 @@ package BusinessLogicLayer;
 
 import BusinessLogicLayer.RestfulObjects.Ship;
 import ServiceRequestor.ServiceCaller;
-import io.swagger.v3.core.util.Json;
 
 import java.io.IOException;
 import java.net.URL;
@@ -34,10 +33,9 @@ public class PortService
     private final double shipDraft;
 
     /**
-     * The URl to communicate over
-     * TODO get this from a config file
+     * the object that contains url paths.
      */
-    private URL url;
+    private UrlConfig urlConfig;
 
     /**
      * Initializes a new instance of the PortService class.
@@ -46,12 +44,13 @@ public class PortService
      * @param shipWidth the width of the ship
      * @param dayOfBooking the day the shipment is due
      */
-    public PortService(double shipDraft, double shipLength, double shipWidth, LocalDate dayOfBooking)
+    public PortService(double shipDraft, double shipLength, double shipWidth, LocalDate dayOfBooking, UrlConfig urlConfig)
     {
         this.shipDraft = shipDraft;
         this.shipLength = shipLength;
         this.shipWidth = shipWidth;
         this.dayOfBooking = dayOfBooking;
+        this.urlConfig = urlConfig;
     }
 
     /**
@@ -65,8 +64,7 @@ public class PortService
         var ship = new Ship(this.shipDraft, this.shipLength, this.shipWidth, this.dayOfBooking);
         var params = JsonParser.ParseShipToJson(ship);
 
-        //// TODO get this from config
-        this.url = new URL("test");
+        var url = new URL(this.urlConfig.getPortAvailabilityUrl());
         var serviceCaller = new ServiceCaller(url);
 
         var availability = serviceCaller.getRequest(params);
