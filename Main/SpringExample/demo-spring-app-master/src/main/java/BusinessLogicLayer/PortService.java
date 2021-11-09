@@ -1,15 +1,12 @@
 package BusinessLogicLayer;
 
-import ServiceRequestor.PortServiceCallerHelper;
+import BusinessLogicLayer.RestfulObjects.Ship;
 import ServiceRequestor.ServiceCaller;
-import org.apache.commons.lang3.NotImplementedException;
+import io.swagger.v3.core.util.Json;
 
-import javax.print.ServiceUI;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 /**
  * the class that initiates the port service requests.
@@ -57,16 +54,16 @@ public class PortService
         this.dayOfBooking = dayOfBooking;
     }
 
-    public String GetPortAvailability() throws IOException
+    /**
+     * Gets the availability of the port.
+     * @return the string representation of the availability of the port.
+     * @throws IllegalArgumentException when the params cannot be converted to strings
+     * @throws IOException occurs if the connection is not
+     */
+    public String GetPortAvailability() throws IllegalArgumentException, IOException
     {
-        var shipDraftStr = String.valueOf(this.shipDraft);
-        var shipLengthStr = String.valueOf(this.shipLength);
-        var shipWidthStr = String.valueOf(shipWidth);
-        var dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyy");
-        var dateStr = dateTimeFormatter.format(this.dayOfBooking);
-
-        var params = PortServiceCallerHelper.buildPortAvailabilityParams(shipDraftStr, shipLengthStr,
-                shipWidthStr, dateStr);
+        var ship = new Ship(this.shipDraft, this.shipLength, this.shipWidth, this.dayOfBooking);
+        var params = JsonParser.ParseShipToJson(ship);
 
         //// TODO get this from config
         this.url = new URL("test");
@@ -74,6 +71,6 @@ public class PortService
 
         var availability = serviceCaller.getRequest(params);
 
-        throw new NotImplementedException();
+        return availability;
     }
 }

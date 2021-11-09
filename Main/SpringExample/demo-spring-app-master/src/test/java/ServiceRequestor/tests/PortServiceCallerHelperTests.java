@@ -1,6 +1,5 @@
 package ServiceRequestor.tests;
 
-import ServiceRequestor.PortServiceCallerHelper;
 import org.junit.jupiter.api.Test;
 import org.springframework.util.Assert;
 
