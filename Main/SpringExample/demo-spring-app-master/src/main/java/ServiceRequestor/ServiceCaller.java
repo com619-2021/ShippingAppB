@@ -1,11 +1,18 @@
 package ServiceRequestor;
 
+import com.sun.istack.logging.Logger;
+
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class ServiceCaller implements IServiceCaller
 {
+    /**
+     * the logger
+     */
+    private Logger logger = Logger.getLogger(ServiceCaller.class);
+
     /**
      * the url to communicate to
      */
@@ -19,28 +26,22 @@ public class ServiceCaller implements IServiceCaller
     {
         this.url = url;
     }
+
     /**
      * This sends a get request to the provided url
      * @param parameters the parameters for the rest request.
      * @return the result of the get request.
-     * @throws IOException
+     * @throws IOException throws if connection cannot be created.
      */
     @Override
     public String getRequest(String parameters) throws IOException
     {
         var httpConnectionHandler = new HttpConnectionHandler(url);
         var contentType = "application.json";
-        var conn = httpConnectionHandler.httpConnectGet(url, contentType);
-        var input = parameters;
+        var connection = httpConnectionHandler.httpConnectGet(url, contentType);
 
-        httpConnectionHandler.writeToOutputStream(input);
-
-        if(conn.getResponseCode() != HttpURLConnection.HTTP_CREATED)
-        {
-            //// TODO log the error
-            throw new RuntimeException("failed: HTTP error code: "+ conn.getResponseCode());
-        }
-
+        httpConnectionHandler.writeToOutputStream(parameters);
+        this.checkResponseCode(connection);
         var output = httpConnectionHandler.readBuffer();
 
         httpConnectionHandler.disconnectHttp();
@@ -58,18 +59,28 @@ public class ServiceCaller implements IServiceCaller
     {
         var httpConnectionHandler = new HttpConnectionHandler(url);
         var contentType = "application.json";
-        var conn = httpConnectionHandler.httpConnectPost(contentType);
+        var connection = httpConnectionHandler.httpConnectPost(contentType);
 
         httpConnectionHandler.writeToOutputStream(parameters);
-        if(conn.getResponseCode() != HttpURLConnection.HTTP_CREATED)
-        {
-            //// TODO log the error
-            throw new RuntimeException("failed: HTTP error code: "+ conn.getResponseCode());
-        }
-
+        this.checkResponseCode(connection);
         var output = httpConnectionHandler.readBuffer();
 
         httpConnectionHandler.disconnectHttp();
         return output;
+    }
+
+    /**
+     * checks the response code.
+     * @param connection the connection to the other services
+     * @throws  IOException gets thrown if URL connection cannot be connected.
+     */
+    private void checkResponseCode(HttpURLConnection connection) throws IOException
+    {
+        if(connection.getResponseCode() != HttpURLConnection.HTTP_CREATED)
+        {
+            var error = new RuntimeException("failed: HTTP error code: "+ connection.getResponseCode());
+            logger.logSevereException(error);
+            throw error;
+        }
     }
 }

@@ -64,11 +64,20 @@ public class PortService
         var ship = new Ship(this.shipDraft, this.shipLength, this.shipWidth, this.dayOfBooking);
         var params = JsonParser.ParseShipToJson(ship);
 
-        var url = new URL(this.urlConfig.getPortAvailabilityUrl());
+        var url = new URL(this.urlConfig.getRequestPortUrl());
         var serviceCaller = new ServiceCaller(url);
 
         var availability = serviceCaller.getRequest(params);
 
         return availability;
+    }
+
+    public String PostPortOrder(int berthId) throws IOException
+    {
+        var url = new URL(this.urlConfig.getOrderPortUrl());
+        var serviceCaller = new ServiceCaller(url);
+        var receipt = serviceCaller.postRequest(String.valueOf(berthId));
+
+        return receipt;
     }
 }

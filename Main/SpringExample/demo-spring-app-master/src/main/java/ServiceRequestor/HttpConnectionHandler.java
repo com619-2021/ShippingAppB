@@ -1,5 +1,8 @@
 package ServiceRequestor;
 
+
+import org.jboss.logging.Logger;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -9,6 +12,8 @@ import java.nio.charset.StandardCharsets;
 
 public class HttpConnectionHandler
 {
+    private Logger logger = Logger.getLogger(HttpConnectionHandler.class);
+
     private final URL url;
     
     private HttpURLConnection connection;
@@ -55,9 +60,9 @@ public class HttpConnectionHandler
         while (br.readLine() != null)
         {
             output += br.readLine();
-            //// TODO log output
         }
 
+        logger.info("Output received: " + output);
         return output;
     }
 }

@@ -1,3 +1,5 @@
 {
-	"portAvailabilityUrl": "test"
+	"requestPortUrl": "test",
+	"orderPortUrl": "wibble",
+	"orderPilotUrl": "floob"
 }

@@ -12,7 +12,7 @@ public class JsonParser
     /**
      * Converts restful ship object to json string.
      * @param ship The ship to convert to JSON.
-     * @return The json string representation of the objetct
+     * @return The json string representation of the object
      * @throws JsonProcessingException occurs if object cannot be converted.
      */
     public static String ParseShipToJson(Ship ship) throws JsonProcessingException
@@ -22,7 +22,7 @@ public class JsonParser
         return json;
     }
 
-    public static UrlConfig loadConfig() throws IOException
+    public static UrlConfig loadUrlConfig() throws IOException
     {
         var rootPath = System.getProperty("user.dir");
         File operatorFile = new File(rootPath + "/URL_config.json");

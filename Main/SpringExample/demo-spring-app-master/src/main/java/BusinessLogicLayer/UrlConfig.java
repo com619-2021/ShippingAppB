@@ -1,26 +1,69 @@
 package BusinessLogicLayer;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class UrlConfig
 {
-    private String portAvailabilityUrl;
+    /**
+     * The url used to request port availability.
+     */
+    private String requestPortUrl;
 
-    public String getPortAvailabilityUrl()
+    /**
+     * gets the url to request port availability
+     * @return the url to request port availability
+     */
+    public String getRequestPortUrl()
     {
-        return this.portAvailabilityUrl;
+        return this.requestPortUrl;
     }
 
-    public void setPortAvailabilityUrl(String portAvailabilityUrl)
+    /**
+     * sets the value of the url used when requesting port availability.
+     * @param requestPortUrl the url
+     */
+    public void setRequestPortUrl(String requestPortUrl)
     {
-        this.portAvailabilityUrl = portAvailabilityUrl;
+        this.requestPortUrl = requestPortUrl;
     }
 
-    public UrlConfig()
-    {
+    /**
+     * The url used to order a port.
+     */
+    private String orderPortUrl;
 
+    /**
+     * gets the url to order a port.
+     * @return the url to order a port.
+     */
+    public String getOrderPortUrl()
+    {
+        return this.requestPortUrl;
     }
 
-    public UrlConfig(String portAvailabilityUrl)
+    /**
+     * sets the value of the url used when ordering a port.
+     * @param portAvailabilityUrl the url
+     */
+    public void setOrderPortUrl(String portAvailabilityUrl)
     {
-        this.portAvailabilityUrl = portAvailabilityUrl;
+        this.requestPortUrl = portAvailabilityUrl;
     }
+
+    /**
+     * The url used to order a pilot.
+     */
+    private String orderPilotUrl;
+
+    /**
+     * gets the url to order a pilot.
+     * @return the url to order a pilot.
+     */
+    public String getOrderPilotUrl() { return orderPilotUrl; }
+
+    /**
+     * sets the value of the url used when ordering a pilot.
+     * @param orderPilotUrl
+     */
+    public void setOrderPilotUrl(String orderPilotUrl) { this.orderPilotUrl = orderPilotUrl; }
 }

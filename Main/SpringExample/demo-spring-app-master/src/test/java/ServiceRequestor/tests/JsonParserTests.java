@@ -27,9 +27,10 @@ public class JsonParserTests
     public void LoadConfigTest() throws IOException
     {
         //// TODO test this works on unix
-        var actual = JsonParser.loadConfig();
-        var expected = new UrlConfig("test");
+        var actual = JsonParser.loadUrlConfig();
+        var expected = new UrlConfig();
+        expected.setRequestPortUrl("test");
 
-        Assert.isTrue(expected.getPortAvailabilityUrl().equals(actual.getPortAvailabilityUrl()), "actual: port availability url: " + actual.getPortAvailabilityUrl());
+        Assert.isTrue(expected.getRequestPortUrl().equals(actual.getRequestPortUrl()), "actual: port availability url: " + actual.getRequestPortUrl());
     }
 }
