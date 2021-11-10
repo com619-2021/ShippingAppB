@@ -1,11 +1,11 @@
 package BusinessLogicLayer;
 
 import BusinessLogicLayer.RestfulObjects.Ship;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Scanner;
 
 public class JsonParser
 {
@@ -13,12 +13,11 @@ public class JsonParser
      * Converts restful ship object to json string.
      * @param ship The ship to convert to JSON.
      * @return The json string representation of the object
-     * @throws JsonProcessingException occurs if object cannot be converted.
      */
-    public static String ParseShipToJson(Ship ship) throws JsonProcessingException
+    public static String ParseShipToJson(Ship ship)
     {
-        ObjectMapper objectMapper = new ObjectMapper();
-        var json = objectMapper.writeValueAsString(ship);
+        var gson = new Gson();
+        var json = gson.toJson(ship);
         return json;
     }
 
@@ -26,7 +25,14 @@ public class JsonParser
     {
         var rootPath = System.getProperty("user.dir");
         File operatorFile = new File(rootPath + "/URL_config.json");
-        UrlConfig config = new ObjectMapper().readValue(operatorFile, UrlConfig.class);
+        var scanner = new Scanner(operatorFile);
+        String output = "";
+        while(scanner.hasNextLine())
+        {
+            output += scanner.nextLine();
+        }
+        Gson gson = new Gson();
+        var config = gson.fromJson(output, UrlConfig.class);
         return config;
     }
 }
