@@ -42,7 +42,7 @@ public class HarbourService
      */
     public String postPilotOrder() throws IOException
     {
-        var url = new URL(this.urlConfig.getOrderPortUrl());
+        var url = new URL(this.urlConfig.getOrderPilotUrl());
         var serviceCaller = new ServiceCaller(url);
         var receipt = serviceCaller.postRequest(String.valueOf(this.berthId));
 

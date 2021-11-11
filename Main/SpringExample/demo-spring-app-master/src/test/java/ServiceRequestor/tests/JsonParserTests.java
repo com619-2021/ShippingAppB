@@ -13,7 +13,7 @@ import java.time.LocalDate;
 public class JsonParserTests
 {
     @Test
-    public void RestfulShipParsing() throws JsonProcessingException
+    public void RestfulShipParsing()
     {
         var date = LocalDate.parse("2021-05-12");
         var ship = new Ship(34.5, 678.3, 67, date);

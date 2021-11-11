@@ -63,7 +63,7 @@ public class UrlConfig
 
     /**
      * sets the value of the url used when ordering a pilot.
-     * @param orderPilotUrl
+     * @param orderPilotUrl the url to set.
      */
     public void setOrderPilotUrl(String orderPilotUrl) { this.orderPilotUrl = orderPilotUrl; }
 }
