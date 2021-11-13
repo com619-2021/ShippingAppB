@@ -1,6 +1,7 @@
 package BusinessLogicLayer;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 public interface IPortService
 {
@@ -10,13 +11,14 @@ public interface IPortService
      * @throws IllegalArgumentException when the params cannot be converted to strings
      * @throws IOException occurs if the connection is not
      */
-    String GetPortAvailability() throws IllegalArgumentException, IOException;
+    String getBerths() throws IllegalArgumentException, IOException;
 
     /**
      * orders the berth
      * @param berthId the id of the berth to use
+     * @param dateOfArrival the date the ship is due.
      * @return the string representation of the receipt.
      * @throws IOException id the connection doesn't work.
      */
-    String PostPortOrder(int berthId) throws IOException;
+    String getPortServices(int berthId, LocalDate dateOfArrival) throws IOException;
 }

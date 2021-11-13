@@ -1,5 +1,6 @@
 package BusinessLogicLayer;
 
+import BusinessLogicLayer.RestfulObjects.Berth;
 import BusinessLogicLayer.RestfulObjects.Ship;
 import ServiceRequestor.ServiceCaller;
 
@@ -59,10 +60,10 @@ public class PortService implements IPortService
      * @throws IllegalArgumentException when the params cannot be converted to strings
      * @throws IOException occurs if the connection is not
      */
-    public String GetPortAvailability() throws IllegalArgumentException, IOException
+    public String getBerths() throws IllegalArgumentException, IOException
     {
         var ship = new Ship(this.shipDraft, this.shipLength, this.shipWidth, this.dayOfBooking);
-        var params = JsonParser.ParseShipToJson(ship);
+        var params = JsonParser.parseShipToJson(ship);
 
         var url = new URL(this.urlConfig.getRequestPortUrl());
         var serviceCaller = new ServiceCaller(url);
@@ -75,14 +76,17 @@ public class PortService implements IPortService
     /**
      * orders the berth
      * @param berthId the id of the berth to use
+     * @param dateOfArrival the date the ship is due.
      * @return the string representation of the receipt.
      * @throws IOException id the connection doesn't work.
      */
-    public String PostPortOrder(int berthId) throws IOException
+    public String getPortServices(int berthId, LocalDate dateOfArrival) throws IOException
     {
+        var berth = new Berth(berthId, String.valueOf(dateOfArrival));
+        var params = JsonParser.parseBerthToJson(berth);
         var url = new URL(this.urlConfig.getOrderPortUrl());
         var serviceCaller = new ServiceCaller(url);
-        var receipt = serviceCaller.postRequest(String.valueOf(berthId));
+        var receipt = serviceCaller.postRequest(params);
 
         return receipt;
     }
