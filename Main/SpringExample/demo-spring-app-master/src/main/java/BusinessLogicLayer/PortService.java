@@ -10,7 +10,7 @@ import java.time.LocalDate;
 /**
  * the class that initiates the port service requests.
  */
-public class PortService
+public class PortService implements IPortService
 {
     /**
      * The length of the ship
@@ -72,6 +72,12 @@ public class PortService
         return availability;
     }
 
+    /**
+     * orders the berth
+     * @param berthId the id of the berth to use
+     * @return the string representation of the receipt.
+     * @throws IOException id the connection doesn't work.
+     */
     public String PostPortOrder(int berthId) throws IOException
     {
         var url = new URL(this.urlConfig.getOrderPortUrl());
