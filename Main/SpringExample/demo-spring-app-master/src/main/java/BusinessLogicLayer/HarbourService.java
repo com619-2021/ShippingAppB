@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 
-public class HarbourService
+public class HarbourService implements IHarbourService
 {
     /**
      * The id of the berth the ship is docking to.

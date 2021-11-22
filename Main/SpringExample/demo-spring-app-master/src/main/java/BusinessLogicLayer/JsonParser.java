@@ -1,5 +1,6 @@
 package BusinessLogicLayer;
 
+import BusinessLogicLayer.RestfulObjects.Berth;
 import BusinessLogicLayer.RestfulObjects.Ship;
 import com.google.gson.Gson;
 
@@ -14,7 +15,7 @@ public class JsonParser
      * @param ship The ship to convert to JSON.
      * @return The json string representation of the object
      */
-    public static String ParseShipToJson(Ship ship)
+    public static String parseShipToJson(Ship ship)
     {
         var gson = new Gson();
         var json = gson.toJson(ship);
@@ -34,5 +35,12 @@ public class JsonParser
         Gson gson = new Gson();
         var config = gson.fromJson(output, UrlConfig.class);
         return config;
+    }
+
+    public static String parseBerthToJson(Berth berth)
+    {
+        var gson = new Gson();
+        var json = gson.toJson(berth);
+        return json;
     }
 }
