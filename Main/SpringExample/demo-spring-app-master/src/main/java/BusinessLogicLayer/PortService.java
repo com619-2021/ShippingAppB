@@ -1,6 +1,7 @@
 package BusinessLogicLayer;
 
 import BusinessLogicLayer.RestfulObjects.Berth;
+import BusinessLogicLayer.RestfulObjects.BookBerthDTO;
 import BusinessLogicLayer.RestfulObjects.Ship;
 import ServiceRequestor.ServiceCaller;
 
@@ -69,11 +70,12 @@ public class PortService implements IPortService
      */
     public String getBerths() throws IllegalArgumentException, IOException
     {
-        var ship = new Ship(this.shipDraft, this.shipLength, this.shipWidth, this.dayOfBooking, this.uuid);
-        var params = JsonParser.parseShipToJson(ship);
+        var ship = new Ship(this.shipDraft, this.shipLength, this.shipWidth, this.uuid);
+        var dto = new BookBerthDTO(this.dayOfBooking, ship);
+        var params = JsonParser.parsePortDtoToJson(dto);
 
         var url = new URL(this.urlConfig.getRequestPortUrl());
-        var serviceCaller = new ServiceCaller(url);
+       var serviceCaller = new ServiceCaller(url);
 
         var availability = serviceCaller.getRequest(params);
 

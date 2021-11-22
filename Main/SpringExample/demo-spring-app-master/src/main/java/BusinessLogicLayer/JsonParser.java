@@ -1,26 +1,25 @@
 package BusinessLogicLayer;
 
 import BusinessLogicLayer.RestfulObjects.Berth;
-import BusinessLogicLayer.RestfulObjects.PilotAvailability;
+import BusinessLogicLayer.RestfulObjects.BookBerthDTO;
 import BusinessLogicLayer.RestfulObjects.Ship;
 import com.google.gson.Gson;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class JsonParser
 {
     /**
      * Converts restful ship object to json string.
-     * @param ship The ship to convert to JSON.
+     * @param berthDTO The berth dto to convert to JSON.
      * @return The json string representation of the object
      */
-    public static String parseShipToJson(Ship ship)
+    public static String parsePortDtoToJson(BookBerthDTO berthDTO)
     {
         var gson = new Gson();
-        var json = gson.toJson(ship);
+        var json = gson.toJson(berthDTO);
         return json;
     }
 
@@ -46,10 +45,9 @@ public class JsonParser
         return json;
     }
 
-    public static ArrayList<Integer> parseJsonToPilotAvailability(String json)
+    public static boolean parseJsonToPilotAvailability(String json)
     {
         var gson = new Gson();
-        var obj = gson.fromJson(json, ArrayList.class);
-        return obj;
+        return gson.fromJson(json, boolean.class);
     }
 }
