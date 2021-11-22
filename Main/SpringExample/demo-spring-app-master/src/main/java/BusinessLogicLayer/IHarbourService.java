@@ -7,5 +7,5 @@ public interface IHarbourService
 {
     public boolean getPilotAvailabilities() throws IOException;
 
-    public String postPilotOrder(int pilotId) throws IOException;
+    public String postPilotOrder() throws IOException;
 }

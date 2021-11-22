@@ -1,6 +1,5 @@
 package BusinessLogicLayer.RestfulObjects;
 
-import java.time.LocalDate;
 import java.util.UUID;
 
 public class Ship

@@ -2,21 +2,21 @@ package BusinessLogicLayer.RestfulObjects;
 
 public class Berth
 {
-    private final int berthId;
-
-    /**
-     * The day the shipment is due
-     */
-    private final String dayOfBooking;
+    private int berthId;
 
     public int getBerthId()
     {
         return berthId;
     }
 
-    public Berth(int berthId, String dayOfBooking)
+    public void setBerthId(int bethId){ this.berthId = berthId;}
+
+    private double longitude = -1.395619;
+
+    private double latitude = 50.889490;
+
+    public Berth(int berthId)
     {
         this.berthId = berthId;
-        this.dayOfBooking = dayOfBooking;
     }
 }

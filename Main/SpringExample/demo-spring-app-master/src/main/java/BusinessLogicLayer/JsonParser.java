@@ -2,6 +2,7 @@ package BusinessLogicLayer;
 
 import BusinessLogicLayer.RestfulObjects.Berth;
 import BusinessLogicLayer.RestfulObjects.BookBerthDTO;
+import BusinessLogicLayer.RestfulObjects.BookPilotDto;
 import BusinessLogicLayer.RestfulObjects.Ship;
 import com.google.gson.Gson;
 
@@ -38,10 +39,10 @@ public class JsonParser
         return config;
     }
 
-    public static String parseBerthToJson(Berth berth)
+    public static String parsePilotOrderToJson(BookPilotDto dto)
     {
         var gson = new Gson();
-        var json = gson.toJson(berth);
+        var json = gson.toJson(dto);
         return json;
     }
 
