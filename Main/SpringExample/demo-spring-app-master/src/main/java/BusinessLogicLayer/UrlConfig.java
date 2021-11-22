@@ -1,6 +1,5 @@
 package BusinessLogicLayer;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class UrlConfig
 {

@@ -3,7 +3,6 @@ package ServiceRequestor.tests;
 import BusinessLogicLayer.JsonParser;
 import BusinessLogicLayer.RestfulObjects.Ship;
 import BusinessLogicLayer.UrlConfig;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.jupiter.api.Test;
 import org.springframework.util.Assert;
 
