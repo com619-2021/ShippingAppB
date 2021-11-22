@@ -1,6 +1,7 @@
 package BusinessLogicLayer.RestfulObjects;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 public class Ship
 {
@@ -24,6 +25,11 @@ public class Ship
      * the vertical distance between the waterline and the bottom of the hull
      */
     private final double shipDraft;
+
+    /**
+     * The unique identifier for the ship
+     */
+    private final UUID uuid;
 
     /**
      * Gets the ships length
@@ -67,12 +73,14 @@ public class Ship
      * @param shipLength the length of the ship meters
      * @param shipWidth the width of the ship meters
      * @param dayOfBooking the day the ship is due.
+     * @param uuid the unique identifier for the ship.
      */
-    public Ship(double shipDraft, double shipLength, double shipWidth, LocalDate dayOfBooking)
+    public Ship(double shipDraft, double shipLength, double shipWidth, LocalDate dayOfBooking, UUID uuid)
     {
         this.shipDraft = shipDraft;
         this.shipLength = shipLength;
         this.shipWidth = shipWidth;
         this.dayOfBooking = dayOfBooking.toString();
+        this.uuid = uuid;
     }
 }

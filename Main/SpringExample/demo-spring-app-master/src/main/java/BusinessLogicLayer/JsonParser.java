@@ -1,11 +1,13 @@
 package BusinessLogicLayer;
 
 import BusinessLogicLayer.RestfulObjects.Berth;
+import BusinessLogicLayer.RestfulObjects.PilotAvailability;
 import BusinessLogicLayer.RestfulObjects.Ship;
 import com.google.gson.Gson;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class JsonParser
@@ -42,5 +44,12 @@ public class JsonParser
         var gson = new Gson();
         var json = gson.toJson(berth);
         return json;
+    }
+
+    public static ArrayList<Integer> parseJsonToPilotAvailability(String json)
+    {
+        var gson = new Gson();
+        var obj = gson.fromJson(json, ArrayList.class);
+        return obj;
     }
 }

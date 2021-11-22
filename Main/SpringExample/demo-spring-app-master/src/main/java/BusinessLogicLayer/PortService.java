@@ -7,6 +7,7 @@ import ServiceRequestor.ServiceCaller;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.UUID;
 
 /**
  * the class that initiates the port service requests.
@@ -34,6 +35,11 @@ public class PortService implements IPortService
     private final double shipDraft;
 
     /**
+     * The unique identifier for the ship
+     */
+    private final UUID uuid;
+
+    /**
      * the object that contains url paths.
      */
     private UrlConfig urlConfig;
@@ -45,13 +51,14 @@ public class PortService implements IPortService
      * @param shipWidth the width of the ship
      * @param dayOfBooking the day the shipment is due
      */
-    public PortService(double shipDraft, double shipLength, double shipWidth, LocalDate dayOfBooking, UrlConfig urlConfig)
+    public PortService(double shipDraft, double shipLength, double shipWidth, LocalDate dayOfBooking, UrlConfig urlConfig, UUID uuid)
     {
         this.shipDraft = shipDraft;
         this.shipLength = shipLength;
         this.shipWidth = shipWidth;
         this.dayOfBooking = dayOfBooking;
         this.urlConfig = urlConfig;
+        this.uuid = uuid;
     }
 
     /**
@@ -62,7 +69,7 @@ public class PortService implements IPortService
      */
     public String getBerths() throws IllegalArgumentException, IOException
     {
-        var ship = new Ship(this.shipDraft, this.shipLength, this.shipWidth, this.dayOfBooking);
+        var ship = new Ship(this.shipDraft, this.shipLength, this.shipWidth, this.dayOfBooking, this.uuid);
         var params = JsonParser.parseShipToJson(ship);
 
         var url = new URL(this.urlConfig.getRequestPortUrl());
