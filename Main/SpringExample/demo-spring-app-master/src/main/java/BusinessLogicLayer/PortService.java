@@ -3,6 +3,7 @@ package BusinessLogicLayer;
 import BusinessLogicLayer.RestfulObjects.Berth;
 import BusinessLogicLayer.RestfulObjects.BookBerthDTO;
 import BusinessLogicLayer.RestfulObjects.Ship;
+import BusinessLogicLayer.RestfulObjects.ShipType;
 import ServiceRequestor.ServiceCaller;
 import com.google.gson.JsonObject;
 import io.swagger.v3.core.util.Json;
@@ -43,6 +44,11 @@ public class PortService implements IPortService
     private final UUID uuid;
 
     /**
+     * The class of ship.
+     */
+    private final ShipType shipType;
+
+    /**
      * the object that contains url paths.
      */
     private UrlConfig urlConfig;
@@ -54,7 +60,13 @@ public class PortService implements IPortService
      * @param shipWidth the width of the ship
      * @param dayOfBooking the day the shipment is due
      */
-    public PortService(double shipDraft, double shipLength, double shipWidth, LocalDate dayOfBooking, UrlConfig urlConfig, UUID uuid)
+    public PortService(double shipDraft,
+                       double shipLength,
+                       double shipWidth,
+                       LocalDate dayOfBooking,
+                       UrlConfig urlConfig,
+                       UUID uuid,
+                       ShipType shipType)
     {
         this.shipDraft = shipDraft;
         this.shipLength = shipLength;
@@ -62,6 +74,7 @@ public class PortService implements IPortService
         this.dayOfBooking = dayOfBooking;
         this.urlConfig = urlConfig;
         this.uuid = uuid;
+        this.shipType = shipType;
     }
 
     /**
@@ -72,7 +85,7 @@ public class PortService implements IPortService
      */
     public String getBerths() throws IllegalArgumentException, IOException
     {
-        var ship = new Ship(this.shipDraft, this.shipLength, this.shipWidth, this.uuid);
+        var ship = new Ship(this.shipDraft, this.shipLength, this.shipWidth, this.uuid, this.shipType);
         var dto = new BookBerthDTO(this.dayOfBooking, ship);
         var params = JsonParser.parsePortDtoToJson(dto);
 

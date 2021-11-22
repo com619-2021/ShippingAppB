@@ -26,6 +26,11 @@ public class Ship
     private final UUID uuid;
 
     /**
+     * The class of ship
+     */
+    private final ShipType shipType;
+
+    /**
      * Gets the ships length
      * @return the ships' length meters
      */
@@ -59,11 +64,13 @@ public class Ship
      * @param shipWidth the width of the ship meters
      * @param uuid the unique identifier.
      */
-    public Ship(double shipDraft, double shipLength, double shipWidth, UUID uuid)
+    public Ship(double shipDraft, double shipLength, double shipWidth, UUID uuid, ShipType shipType)
     {
         this.shipDraft = shipDraft;
         this.shipLength = shipLength;
         this.shipWidth = shipWidth;
         this.uuid = uuid;
+        this.shipType = shipType;
     }
 }
+
