@@ -39,7 +39,7 @@ public class JsonParser
         return config;
     }
 
-    public static String parsePilotOrderToJson(BookPilotDto dto)
+    public static String parseBookPilotDtoToJson(BookPilotDto dto)
     {
         var gson = new Gson();
         var json = gson.toJson(dto);

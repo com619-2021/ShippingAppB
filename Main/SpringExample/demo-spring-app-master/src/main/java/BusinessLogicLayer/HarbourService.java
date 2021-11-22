@@ -4,13 +4,10 @@ import BusinessLogicLayer.RestfulObjects.Berth;
 import BusinessLogicLayer.RestfulObjects.BookPilotDto;
 import BusinessLogicLayer.RestfulObjects.Ship;
 import ServiceRequestor.ServiceCaller;
-import io.swagger.v3.core.util.Json;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class HarbourService implements IHarbourService
 {
@@ -60,7 +57,7 @@ public class HarbourService implements IHarbourService
         var url = new URL(String.valueOf(this.urlConfig.getPilotAvailabilityUrl()));
         var serviceCaller = new ServiceCaller(url);
         var dto = new BookPilotDto(dayOfArrival, this.ship, this.berth);
-        var params = JsonParser.parsePilotOrderToJson(dto);
+        var params = JsonParser.parseBookPilotDtoToJson(dto);
         var result = serviceCaller.getRequest(params);
         return JsonParser.parseJsonToPilotAvailability(result);
     }
@@ -76,7 +73,7 @@ public class HarbourService implements IHarbourService
         var url = new URL(this.urlConfig.getOrderPilotUrl());
         var serviceCaller = new ServiceCaller(url);
         var dto = new BookPilotDto(dayOfArrival, this.ship, this.berth);
-        var params = JsonParser.parsePilotOrderToJson(dto);
+        var params = JsonParser.parseBookPilotDtoToJson(dto);
         var receipt = serviceCaller.postRequest(params);
 
         return receipt;

@@ -4,6 +4,8 @@ import BusinessLogicLayer.RestfulObjects.Berth;
 import BusinessLogicLayer.RestfulObjects.BookBerthDTO;
 import BusinessLogicLayer.RestfulObjects.Ship;
 import ServiceRequestor.ServiceCaller;
+import com.google.gson.JsonObject;
+import io.swagger.v3.core.util.Json;
 
 import java.io.IOException;
 import java.net.URL;
@@ -91,11 +93,13 @@ public class PortService implements IPortService
      */
     public String getPortServices(int berthId, LocalDate dateOfArrival) throws IOException
     {
-        var berth = new Berth(berthId, String.valueOf(dateOfArrival));
-        var params = JsonParser.parseBerthToJson(berth);
+        //// TODO fix the JSON object with a DTO
+        JsonObject object = new JsonObject();
+        object.addProperty("BerthId", berthId);
+        object.addProperty("dayOfShipArrival", dateOfArrival.toString());
         var url = new URL(this.urlConfig.getOrderPortUrl());
         var serviceCaller = new ServiceCaller(url);
-        var receipt = serviceCaller.postRequest(params);
+        var receipt = serviceCaller.postRequest(object.toString());
 
         return receipt;
     }

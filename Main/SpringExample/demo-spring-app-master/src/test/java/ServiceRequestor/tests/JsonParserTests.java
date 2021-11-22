@@ -1,7 +1,9 @@
 package ServiceRequestor.tests;
 
 import BusinessLogicLayer.JsonParser;
+import BusinessLogicLayer.RestfulObjects.Berth;
 import BusinessLogicLayer.RestfulObjects.BookBerthDTO;
+import BusinessLogicLayer.RestfulObjects.BookPilotDto;
 import BusinessLogicLayer.RestfulObjects.Ship;
 import BusinessLogicLayer.UrlConfig;
 import org.junit.jupiter.api.Test;
@@ -14,7 +16,7 @@ import java.util.UUID;
 public class JsonParserTests
 {
     @Test
-    public void RestfulShipParsing()
+    public void RestfulShipParsingTest()
     {
         var date = LocalDate.parse("2021-05-12");
         var uuid = UUID.fromString("38400000-8cf0-11bd-b23e-10b96e4ef00d");
@@ -38,11 +40,26 @@ public class JsonParserTests
     }
 
     @Test
-    public void RestfulPilotAvailability()
+    public void RestfulPilotAvailabilityTest()
     {
         var json = "true";
         var availablePilotIds = JsonParser.parseJsonToPilotAvailability(json);
         
         Assert.isTrue(availablePilotIds,"actual: " + availablePilotIds);
+    }
+
+    @Test
+    public void BookingPilotDtoParsingTest()
+    {
+        var date = LocalDate.parse("2021-05-12");
+        var uuid = UUID.fromString("38400000-8cf0-11bd-b23e-10b96e4ef00d");
+        var ship = new Ship(34.5, 678.3, 67, uuid);
+        var berth = new Berth(1);
+        var dto = new BookPilotDto(date, ship, berth);
+        var json = JsonParser.parseBookPilotDtoToJson(dto);
+
+        var expected = "{\"dayOfArrival\":\"2021-05-12\",\"ship\":{\"shipLength\":678.3,\"shipWidth\":67.0,\"shipDraft\":34.5,\"uuid\":\"38400000-8cf0-11bd-b23e-10b96e4ef00d\"},\"berth\":{\"berthId\":1,\"longitude\":-1.395619,\"latitude\":50.88949}}";
+
+        Assert.isTrue(json.equals(expected), "actual was: " + json);
     }
 }
