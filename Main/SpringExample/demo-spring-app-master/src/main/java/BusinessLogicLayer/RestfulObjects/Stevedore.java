@@ -22,6 +22,10 @@ public class Stevedore
      */
     private boolean wasteRemovalRequested;
 
+    /**
+     * Sets whether cargo needs loading.
+     * @param cargoOn whether cargo needs loading.
+     */
     public void setCargoOn(boolean cargoOn)
     {
         this.cargoOn = cargoOn;
@@ -34,15 +38,6 @@ public class Stevedore
     public boolean isCargoOn()
     {
         return cargoOn;
-    }
-
-    /**
-     * Sets whether cargo needs loading to ship
-     * @return whether cargo needs loading to ship
-     */
-    public void setCargoOn()
-    {
-        this.cargoOn = cargoOn;
     }
 
     /**
