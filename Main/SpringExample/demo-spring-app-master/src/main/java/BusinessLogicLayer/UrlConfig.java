@@ -1,6 +1,8 @@
 package BusinessLogicLayer;
 
 
+import java.util.ArrayList;
+
 public class UrlConfig
 {
     /**
@@ -65,4 +67,16 @@ public class UrlConfig
      * @param orderPilotUrl the url to set.
      */
     public void setOrderPilotUrl(String orderPilotUrl) { this.orderPilotUrl = orderPilotUrl; }
+
+    private String pilotAvailabilityUrl;
+
+    public String getPilotAvailabilityUrl()
+    {
+        return this.pilotAvailabilityUrl;
+    }
+
+    public void setPilotAvailabilityUrl(String pilotAvailabilityUrl)
+    {
+        this.pilotAvailabilityUrl = pilotAvailabilityUrl;
+    }
 }

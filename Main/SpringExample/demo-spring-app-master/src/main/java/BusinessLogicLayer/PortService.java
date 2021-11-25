@@ -1,12 +1,17 @@
 package BusinessLogicLayer;
 
 import BusinessLogicLayer.RestfulObjects.Berth;
+import BusinessLogicLayer.RestfulObjects.BookBerthDTO;
 import BusinessLogicLayer.RestfulObjects.Ship;
+import BusinessLogicLayer.RestfulObjects.ShipType;
 import ServiceRequestor.ServiceCaller;
+import com.google.gson.JsonObject;
+import io.swagger.v3.core.util.Json;
 
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.UUID;
 
 /**
  * the class that initiates the port service requests.
@@ -34,6 +39,16 @@ public class PortService implements IPortService
     private final double shipDraft;
 
     /**
+     * The unique identifier for the ship
+     */
+    private final UUID uuid;
+
+    /**
+     * The class of ship.
+     */
+    private final ShipType shipType;
+
+    /**
      * the object that contains url paths.
      */
     private UrlConfig urlConfig;
@@ -45,13 +60,21 @@ public class PortService implements IPortService
      * @param shipWidth the width of the ship
      * @param dayOfBooking the day the shipment is due
      */
-    public PortService(double shipDraft, double shipLength, double shipWidth, LocalDate dayOfBooking, UrlConfig urlConfig)
+    public PortService(double shipDraft,
+                       double shipLength,
+                       double shipWidth,
+                       LocalDate dayOfBooking,
+                       UrlConfig urlConfig,
+                       UUID uuid,
+                       ShipType shipType)
     {
         this.shipDraft = shipDraft;
         this.shipLength = shipLength;
         this.shipWidth = shipWidth;
         this.dayOfBooking = dayOfBooking;
         this.urlConfig = urlConfig;
+        this.uuid = uuid;
+        this.shipType = shipType;
     }
 
     /**
@@ -62,11 +85,12 @@ public class PortService implements IPortService
      */
     public String getBerths() throws IllegalArgumentException, IOException
     {
-        var ship = new Ship(this.shipDraft, this.shipLength, this.shipWidth, this.dayOfBooking);
-        var params = JsonParser.parseShipToJson(ship);
+        var ship = new Ship(this.shipDraft, this.shipLength, this.shipWidth, this.uuid, this.shipType);
+        var dto = new BookBerthDTO(this.dayOfBooking, ship);
+        var params = JsonParser.parsePortDtoToJson(dto);
 
         var url = new URL(this.urlConfig.getRequestPortUrl());
-        var serviceCaller = new ServiceCaller(url);
+       var serviceCaller = new ServiceCaller(url);
 
         var availability = serviceCaller.getRequest(params);
 
@@ -82,11 +106,13 @@ public class PortService implements IPortService
      */
     public String getPortServices(int berthId, LocalDate dateOfArrival) throws IOException
     {
-        var berth = new Berth(berthId, String.valueOf(dateOfArrival));
-        var params = JsonParser.parseBerthToJson(berth);
+        //// TODO fix the JSON object with a DTO
+        JsonObject object = new JsonObject();
+        object.addProperty("BerthId", berthId);
+        object.addProperty("dayOfShipArrival", dateOfArrival.toString());
         var url = new URL(this.urlConfig.getOrderPortUrl());
         var serviceCaller = new ServiceCaller(url);
-        var receipt = serviceCaller.postRequest(params);
+        var receipt = serviceCaller.postRequest(object.toString());
 
         return receipt;
     }

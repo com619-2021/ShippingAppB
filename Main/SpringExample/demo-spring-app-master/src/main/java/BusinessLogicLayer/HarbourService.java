@@ -1,5 +1,8 @@
 package BusinessLogicLayer;
 
+import BusinessLogicLayer.RestfulObjects.Berth;
+import BusinessLogicLayer.RestfulObjects.BookPilotDto;
+import BusinessLogicLayer.RestfulObjects.Ship;
 import ServiceRequestor.ServiceCaller;
 
 import java.io.IOException;
@@ -9,30 +12,54 @@ import java.time.LocalDate;
 public class HarbourService implements IHarbourService
 {
     /**
-     * The id of the berth the ship is docking to.
-     */
-    private final int berthId;
-
-    /**
-     * The day the ship is expected.
-     */
-    private final LocalDate dayShipDue;
-
-    /**
      * The object containing the url paths
      */
     private final UrlConfig urlConfig;
 
     /**
-     * Initializes a new instance of the HarbourService
-     * @param berthId the id of the berth the ship will dock in
-     * @param dayShipDue the day the ship is due to arrive.
+     * The ship the pilot needs to pilot.
      */
-    public HarbourService(int berthId, LocalDate dayShipDue, UrlConfig urlConfig)
+    private final Ship ship;
+
+    /**
+     * The day the ship is expected to port.
+     */
+    private final LocalDate dayOfArrival;
+
+    /**
+     * The details of berth to port into.
+     */
+    private final Berth berth;
+
+    /**
+     * Initializes a new instance of the HarbourService
+     * @param ship the ship that is due to arrive.
+     * @param urlConfig the url config for ReSTful comms
+     * @param berth the berth to port in.
+     * @param dayOfShipArrival the day the ship is expected.
+     */
+    public HarbourService(UrlConfig urlConfig, Ship ship, Berth berth, LocalDate dayOfShipArrival)
     {
-        this.berthId = berthId;
-        this.dayShipDue = dayShipDue;
         this.urlConfig = urlConfig;
+        this.ship = ship;
+        this.dayOfArrival = dayOfShipArrival;
+        this.berth = berth;
+    }
+
+    /**
+     *
+     * @return
+     * @throws IOException
+     */
+    @Override
+    public boolean getPilotAvailabilities() throws IOException
+    {
+        var url = new URL(String.valueOf(this.urlConfig.getPilotAvailabilityUrl()));
+        var serviceCaller = new ServiceCaller(url);
+        var dto = new BookPilotDto(dayOfArrival, this.ship, this.berth);
+        var params = JsonParser.parseBookPilotDtoToJson(dto);
+        var result = serviceCaller.getRequest(params);
+        return JsonParser.parseJsonToPilotAvailability(result);
     }
 
     /**
@@ -40,11 +67,14 @@ public class HarbourService implements IHarbourService
      * @return the receipt from the harbour service in string representation
      * @throws IOException thrown if connection cannot be established
      */
+    @Override
     public String postPilotOrder() throws IOException
     {
         var url = new URL(this.urlConfig.getOrderPilotUrl());
         var serviceCaller = new ServiceCaller(url);
-        var receipt = serviceCaller.postRequest(String.valueOf(this.berthId));
+        var dto = new BookPilotDto(dayOfArrival, this.ship, this.berth);
+        var params = JsonParser.parseBookPilotDtoToJson(dto);
+        var receipt = serviceCaller.postRequest(params);
 
         return receipt;
     }
