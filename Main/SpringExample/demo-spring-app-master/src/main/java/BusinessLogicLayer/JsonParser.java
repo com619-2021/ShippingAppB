@@ -1,9 +1,9 @@
 package BusinessLogicLayer;
 
-import BusinessLogicLayer.RestfulObjects.Berth;
 import BusinessLogicLayer.RestfulObjects.BookBerthDTO;
 import BusinessLogicLayer.RestfulObjects.BookPilotDto;
-import BusinessLogicLayer.RestfulObjects.Ship;
+import BusinessLogicLayer.RestfulObjects.CheckPilotAvailable;
+import BusinessLogicLayer.RestfulObjects.HarbourAvailabilityResponse;
 import com.google.gson.Gson;
 
 import java.io.File;
@@ -24,6 +24,11 @@ public class JsonParser
         return json;
     }
 
+    /**
+     * Loads the config for the URLs
+     * @return object containing required URLs
+     * @throws IOException if there is no config file.
+     */
     public static UrlConfig loadUrlConfig() throws IOException
     {
         var rootPath = System.getProperty("user.dir");
@@ -46,9 +51,16 @@ public class JsonParser
         return json;
     }
 
-    public static boolean parseJsonToPilotAvailability(String json)
+    public static HarbourAvailabilityResponse parseJsonToPilotAvailability(String json)
     {
         var gson = new Gson();
-        return gson.fromJson(json, boolean.class);
+        return gson.fromJson(json, HarbourAvailabilityResponse.class);
+    }
+
+
+    public static String parsePilotAvailabilityDtoToJson(CheckPilotAvailable checkPilotAvailable)
+    {
+        var gson = new Gson();
+        return gson.toJson(checkPilotAvailable);
     }
 }

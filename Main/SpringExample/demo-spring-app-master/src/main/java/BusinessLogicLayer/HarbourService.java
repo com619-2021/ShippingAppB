@@ -59,7 +59,8 @@ public class HarbourService implements IHarbourService
         var dto = new BookPilotDto(dayOfArrival, this.ship, this.berth);
         var params = JsonParser.parseBookPilotDtoToJson(dto);
         var result = serviceCaller.getRequest(params);
-        return JsonParser.parseJsonToPilotAvailability(result);
+        var response = JsonParser.parseJsonToPilotAvailability(result);
+        return response.isPossible();
     }
 
     /**

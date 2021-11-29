@@ -3,6 +3,7 @@ package ServiceRequestor.tests;
 import BusinessLogicLayer.JsonParser;
 import BusinessLogicLayer.RestfulObjects.*;
 import BusinessLogicLayer.UrlConfig;
+import io.swagger.v3.core.util.Json;
 import org.junit.jupiter.api.Test;
 import org.springframework.util.Assert;
 
@@ -37,15 +38,6 @@ public class JsonParserTests
     }
 
     @Test
-    public void RestfulPilotAvailabilityTest()
-    {
-        var json = "true";
-        var availablePilotIds = JsonParser.parseJsonToPilotAvailability(json);
-        
-        Assert.isTrue(availablePilotIds,"actual: " + availablePilotIds);
-    }
-
-    @Test
     public void BookingPilotDtoParsingTest()
     {
         var date = LocalDate.parse("2021-05-12");
@@ -58,5 +50,25 @@ public class JsonParserTests
         var expected = "{\"dayOfArrival\":\"2021-05-12\",\"ship\":{\"shipLength\":678.3,\"shipWidth\":67.0,\"shipDraft\":34.5,\"uuid\":\"38400000-8cf0-11bd-b23e-10b96e4ef00d\",\"shipType\":\"Cargo\"},\"berth\":{\"berthId\":1,\"longitude\":-1.395619,\"latitude\":50.88949}}";
 
         Assert.isTrue(json.equals(expected), "actual was: " + json);
+    }
+
+    @Test
+    public void HarbourAvailabilityShipJsonPArsingTest()
+    {
+        var ship = new CheckPilotAvailableShip(354.78, ShipType.Cargo);
+        var obj = new CheckPilotAvailable("2021-05-08", ship);
+        var json = JsonParser.parsePilotAvailabilityDtoToJson(obj);
+
+        var expected = "{\"arrivalDate\":\"2021-05-08\",\"ship\":{\"draft\":354.78,\"type\":\"Cargo\"}}";
+        Assert.isTrue(json.equals(expected), "actual was:" + json);
+    }
+
+    @Test
+    public void JsonCanParseToBool()
+    {
+        var json = "{\"possible\": true}";
+        var result = JsonParser.parseJsonToPilotAvailability(json);
+
+        Assert.isTrue(result.isPossible(), "actual was:" + result);
     }
 }
