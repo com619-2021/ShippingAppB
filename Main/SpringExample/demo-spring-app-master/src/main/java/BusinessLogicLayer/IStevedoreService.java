@@ -1,9 +1,10 @@
 package BusinessLogicLayer;
 
+import BusinessLogicLayer.RestfulObjects.Receipt;
+
 import java.io.IOException;
-import java.net.MalformedURLException;
 
 public interface IStevedoreService
 {
-    public String orderStevedore() throws IOException;
+    Receipt orderStevedore() throws IOException;
 }
