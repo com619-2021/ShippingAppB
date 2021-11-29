@@ -31,10 +31,22 @@ public class JsonParserTests
     {
         //// TODO test this works on unix
         var actual = JsonParser.loadUrlConfig();
-        var expected = new UrlConfig();
-        expected.setRequestPortUrl("test");
+        var expected = new UrlConfig("test",
+                "wibble",
+                "floob",
+                "wibblefloob",
+                "floobwibble");
 
-        Assert.isTrue(expected.getRequestPortUrl().equals(actual.getRequestPortUrl()), "actual: port availability url: " + actual.getRequestPortUrl());
+        Assert.isTrue(expected.getRequestPortUrl().equals(actual.getRequestPortUrl()),
+                "actual: port availability url: " + actual.getRequestPortUrl());
+        Assert.isTrue(expected.getOrderPortUrl().equals(actual.getOrderPortUrl()),
+                "actual is:" + actual.getRequestPortUrl());
+        Assert.isTrue(expected.getRequestPortUrl().equals(actual.getRequestPortUrl()),
+                "actual: port availability url: " + actual.getRequestPortUrl());
+        Assert.isTrue(expected.getPilotAvailabilityUrl().equals(actual.getPilotAvailabilityUrl()),
+                "actual: port availability url: " + actual.getPilotAvailabilityUrl());
+        Assert.isTrue(expected.getOrderStevedoreUrl().equals(actual.getOrderStevedoreUrl()),
+                "actual: port availability url: " + actual.getOrderStevedoreUrl());
     }
 
     @Test
