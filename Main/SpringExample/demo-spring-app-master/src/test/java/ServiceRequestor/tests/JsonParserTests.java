@@ -71,4 +71,16 @@ public class JsonParserTests
 
         Assert.isTrue(result.isPossible(), "actual was:" + result);
     }
+
+    @Test
+    public void ExpectedReceiptOutOfJson()
+    {
+        var json = "{\"uuid\": \"789-789-789-789\", \"totalPrice\": 780.89}";
+        var expected = new Receipt("789-789-789-789", 780.89);
+        var actual = JsonParser.parseJsonToReceipt(json);
+
+        Assert.isTrue(actual.getTotalPrice() == expected.getTotalPrice(), "actual price was: "
+                + actual.getTotalPrice());
+        Assert.isTrue(actual.getUuid().equals(expected.getUuid()), "actual was: " + actual.getUuid());
+    }
 }

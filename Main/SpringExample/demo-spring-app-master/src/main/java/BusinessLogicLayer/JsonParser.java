@@ -1,9 +1,6 @@
 package BusinessLogicLayer;
 
-import BusinessLogicLayer.RestfulObjects.BookBerthDTO;
-import BusinessLogicLayer.RestfulObjects.BookPilotDto;
-import BusinessLogicLayer.RestfulObjects.CheckPilotAvailable;
-import BusinessLogicLayer.RestfulObjects.HarbourAvailabilityResponse;
+import BusinessLogicLayer.RestfulObjects.*;
 import com.google.gson.Gson;
 
 import java.io.File;
@@ -62,5 +59,11 @@ public class JsonParser
     {
         var gson = new Gson();
         return gson.toJson(checkPilotAvailable);
+    }
+
+    public static Receipt parseJsonToReceipt(String json)
+    {
+        var gson = new Gson();
+        return gson.fromJson(json, Receipt.class);
     }
 }
