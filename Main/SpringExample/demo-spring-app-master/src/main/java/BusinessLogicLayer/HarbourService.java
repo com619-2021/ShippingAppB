@@ -1,8 +1,6 @@
 package BusinessLogicLayer;
 
-import BusinessLogicLayer.RestfulObjects.Berth;
-import BusinessLogicLayer.RestfulObjects.BookPilotDto;
-import BusinessLogicLayer.RestfulObjects.Ship;
+import BusinessLogicLayer.RestfulObjects.*;
 import ServiceRequestor.ServiceCaller;
 
 import java.io.IOException;
@@ -47,7 +45,7 @@ public class HarbourService implements IHarbourService
     }
 
     /**
-     *
+     * Sends get request for pilot availability
      * @return
      * @throws IOException
      */
@@ -56,8 +54,9 @@ public class HarbourService implements IHarbourService
     {
         var url = new URL(String.valueOf(this.urlConfig.getPilotAvailabilityUrl()));
         var serviceCaller = new ServiceCaller(url);
-        var dto = new BookPilotDto(dayOfArrival, this.ship, this.berth);
-        var params = JsonParser.parseBookPilotDtoToJson(dto);
+        var shipDto = new CheckPilotAvailableShip(this.ship.getShipDraft(), this.ship.getShipType());
+        var dto = new CheckPilotAvailable(this.dayOfArrival.toString(), shipDto);
+        var params = JsonParser.parsePilotAvailabilityDtoToJson(dto);
         var result = serviceCaller.getRequest(params);
         var response = JsonParser.parseJsonToPilotAvailability(result);
         return response.isPossible();
