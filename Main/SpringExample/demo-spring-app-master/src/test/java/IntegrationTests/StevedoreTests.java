@@ -10,6 +10,7 @@ import org.springframework.util.Assert;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.UUID;
 
 public class StevedoreTests
 {
@@ -18,7 +19,8 @@ public class StevedoreTests
     {
         var dayOfArrival = LocalDate.parse("2021-08-05");
         var servicesOrdered = new StevedoreServicesOrdered(true, true, false, true);
-        var berth = new Berth("789-789-789-789");
+        var uuid = UUID.randomUUID().toString();
+        var berth = new Berth(uuid);
         var url = JsonParser.loadUrlConfig();
         var stevedoreService = new StevedoreService(dayOfArrival, servicesOrdered, berth, url);
         var result = stevedoreService.orderStevedore();
