@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.UUID;
 
-public class StevedoreTests
+public class StevedoreServiceTests
 {
     @Test
     public void OrderStevedoreTest() throws IOException

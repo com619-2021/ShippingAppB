@@ -20,5 +20,5 @@ public interface IPortService
      * @return the string representation of the receipt.
      * @throws IOException id the connection doesn't work.
      */
-    String getPortServices(int berthId, LocalDate dateOfArrival) throws IOException;
+    String getPortServices(String berthId, LocalDate dateOfArrival) throws IOException;
 }

@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.UUID;
 
-public class HarbourTests
+public class HarbourServiceTests
 {
     /**
      * Integration test for getting the availability of the pilots
