@@ -28,8 +28,8 @@ public class JsonParserTests
     @Test
     public void LoadConfigTest() throws IOException
     {
-        //// TODO test this works on unix
-        var actual = JsonParser.loadUrlConfig();
+        var rootPath = System.getProperty("user.dir");
+        var actual = JsonParser.loadUrlConfig(rootPath + "/config");
         var expected = new UrlConfig("test",
                 "wibble",
                 "floob",

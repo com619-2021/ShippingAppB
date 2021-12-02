@@ -15,7 +15,7 @@ public class BookPilot
     {
         try
         {
-            var urls = JsonParser.loadUrlConfig();
+            var urls = JsonParser.loadUrlConfig("/home/data");
             var ship = new Ship(254.7, 235.67, 346, UUID.randomUUID(), ShipType.FERRY);
             var berth = new Berth(UUID.randomUUID().toString());
             var harbourService = new HarbourService(urls, ship, berth, LocalDate.now());
