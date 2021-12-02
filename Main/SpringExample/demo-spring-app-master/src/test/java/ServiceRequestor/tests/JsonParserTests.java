@@ -20,7 +20,7 @@ public class JsonParserTests
         var ship = new Ship(34.5, 678.3, 67, uuid, ShipType.CARGO);
         var dto = new BookBerthDTO(date, ship);
         var actual = JsonParser.parsePortDtoToJson(dto);
-        var expected = "{\"dayOfBooking\":\"2021-05-12\",\"ship\":{\"shipLength\":678.3,\"shipWidth\":67.0,\"shipDraft\":34.5,\"uuid\":\"38400000-8cf0-11bd-b23e-10b96e4ef00d\",\"shipType\":\"CARGO\"}}";
+        var expected = "{\"dayOfBooking\":\"2021-05-12\",\"ship\":{\"length\":678.3,\"width\":67.0,\"draft\":34.5,\"uuid\":\"38400000-8cf0-11bd-b23e-10b96e4ef00d\",\"type\":\"CARGO\"}}";
 
         Assert.isTrue(actual.equals(expected), "actual: " + actual);
     }
@@ -58,7 +58,7 @@ public class JsonParserTests
         var dto = new BookPilotDto(date, ship, berth);
         var json = JsonParser.parseBookPilotDtoToJson(dto);
 
-        var expected = "{\"dayOfArrival\":\"2021-05-12\",\"ship\":{\"shipLength\":678.3,\"shipWidth\":67.0,\"shipDraft\":34.5,\"uuid\":\"38400000-8cf0-11bd-b23e-10b96e4ef00d\",\"shipType\":\"CARGO\"},\"berth\":{\"berthId\":\"1\",\"longitude\":-1.395619,\"latitude\":50.88949}}";
+        var expected = "{\"dayOfArrival\":\"2021-05-12\",\"ship\":{\"length\":678.3,\"width\":67.0,\"draft\":34.5,\"uuid\":\"38400000-8cf0-11bd-b23e-10b96e4ef00d\",\"type\":\"CARGO\"},\"berth\":{\"berthId\":\"1\",\"longitude\":-1.395619,\"latitude\":50.88949}}";
 
         Assert.isTrue(json.equals(expected), "actual was: " + json);
     }
