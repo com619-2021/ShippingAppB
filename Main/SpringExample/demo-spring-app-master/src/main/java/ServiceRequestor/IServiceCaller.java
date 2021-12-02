@@ -7,7 +7,6 @@ public interface IServiceCaller
 {
     /**
      * This sends a get request to the provided url
-     * @param url the url to request.
      * @param parameters the parameters for the rest request.
      * @return the result of the get request.
      * @throws IOException

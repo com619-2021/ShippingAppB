@@ -1,6 +1,6 @@
 package BusinessLogicLayer.RestfulObjects;
 
-public class Stevedore
+public class StevedoreServicesOrdered
 {
     /**
      * whether cargo needs to be loaded
@@ -101,7 +101,7 @@ public class Stevedore
      * @param waterRequested whether water needs loading
      * @param wasteRemovalRequested whether waste needs removing
      */
-    public Stevedore(boolean cargoOn, boolean cargoOff, boolean waterRequested, boolean wasteRemovalRequested)
+    public StevedoreServicesOrdered(boolean cargoOn, boolean cargoOff, boolean waterRequested, boolean wasteRemovalRequested)
     {
         this.cargoOn = cargoOn;
         this.cargoOff = cargoOff;

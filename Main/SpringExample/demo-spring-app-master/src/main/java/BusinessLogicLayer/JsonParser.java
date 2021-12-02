@@ -1,9 +1,6 @@
 package BusinessLogicLayer;
 
-import BusinessLogicLayer.RestfulObjects.Berth;
-import BusinessLogicLayer.RestfulObjects.BookBerthDTO;
-import BusinessLogicLayer.RestfulObjects.BookPilotDto;
-import BusinessLogicLayer.RestfulObjects.Ship;
+import BusinessLogicLayer.RestfulObjects.*;
 import com.google.gson.Gson;
 
 import java.io.File;
@@ -24,6 +21,11 @@ public class JsonParser
         return json;
     }
 
+    /**
+     * Loads the config for the URLs
+     * @return object containing required URLs
+     * @throws IOException if there is no config file.
+     */
     public static UrlConfig loadUrlConfig() throws IOException
     {
         var rootPath = System.getProperty("user.dir");
@@ -39,6 +41,11 @@ public class JsonParser
         return config;
     }
 
+    /**
+     * Parses a BookPilotDto into a json string
+     * @param dto the object to parse
+     * @return the json string representing the object.
+     */
     public static String parseBookPilotDtoToJson(BookPilotDto dto)
     {
         var gson = new Gson();
@@ -46,9 +53,48 @@ public class JsonParser
         return json;
     }
 
-    public static boolean parseJsonToPilotAvailability(String json)
+    /**
+     * Converts the response from the harbour service to an object
+     * @param json the json to parse
+     * @return the object representing the response.
+     */
+    public static HarbourAvailabilityResponse parseJsonToPilotAvailability(String json)
     {
         var gson = new Gson();
-        return gson.fromJson(json, boolean.class);
+        return gson.fromJson(json, HarbourAvailabilityResponse.class);
+    }
+
+
+    /**
+     * Converts a PilotAvailabilityDto to a json string.
+     * @param checkPilotAvailable the object to parse.
+     * @return the json string representing the object.
+     */
+    public static String parsePilotAvailabilityDtoToJson(CheckPilotAvailable checkPilotAvailable)
+    {
+        var gson = new Gson();
+        return gson.toJson(checkPilotAvailable);
+    }
+
+    /**
+     * Parses a json string to the Receipt class.
+     * @param json the json to parse.
+     * @return the object representation of the json string.
+     */
+    public static Receipt parseJsonToReceipt(String json)
+    {
+        var gson = new Gson();
+        return gson.fromJson(json, Receipt.class);
+    }
+
+    /**
+     * Converts a StevedoreDto to a json string
+     * @param dto the object to parse
+     * @return the string representation of the object.
+     */
+    public static String StevedoreDtoToJson(StevedoreDto dto)
+    {
+        var gson = new Gson();
+        return gson.toJson(dto);
     }
 }
