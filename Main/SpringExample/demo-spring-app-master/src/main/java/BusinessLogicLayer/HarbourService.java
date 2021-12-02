@@ -54,7 +54,7 @@ public class HarbourService implements IHarbourService
     {
         var url = new URL(String.valueOf(this.urlConfig.getPilotAvailabilityUrl()));
         var serviceCaller = new ServiceCaller(url);
-        var shipDto = new CheckPilotAvailableShip(this.ship.getShipDraft(), this.ship.getShipType());
+        var shipDto = new CheckPilotAvailableShip(this.ship.getDraft(), this.ship.getType());
         var dto = new CheckPilotAvailable(this.dayOfArrival.toString(), shipDto);
         var params = JsonParser.parsePilotAvailabilityDtoToJson(dto);
         var result = serviceCaller.getRequest(params);
