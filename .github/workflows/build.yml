@@ -33,4 +33,4 @@ jobs:
 
       - name: Build and install project with Maven
         run: mvn -B clean install
-        working-directory: main/SpringExample/demo-spring-app-master/
+        working-directory: Main/SpringExample/demo-spring-app-master/
