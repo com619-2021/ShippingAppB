@@ -1,8 +1,5 @@
 package BusinessLogicLayer;
 
-
-import java.util.ArrayList;
-
 public class UrlConfig
 {
     /**
