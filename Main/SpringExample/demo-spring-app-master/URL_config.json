@@ -2,5 +2,6 @@
 	"orderPortUrl": "wibble",
 	"requestPortUrl": "test",
 	"orderPilotUrl": "floob",
-	"pilotAvailabilityUrl": "wibblefloob"
+	"pilotAvailabilityUrl": "wibblefloob",
+	"orderStevedoreUrl": "floobwibble"
 }

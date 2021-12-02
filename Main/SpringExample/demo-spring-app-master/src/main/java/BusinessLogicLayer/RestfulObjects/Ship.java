@@ -57,6 +57,8 @@ public class Ship
         return shipDraft;
     }
 
+    public ShipType getShipType() { return this.shipType; }
+
     /**
      * Initializes a new instance of the Ship class.
      * @param shipDraft the vertical distance from water line to bottom of ship meters

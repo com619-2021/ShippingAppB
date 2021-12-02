@@ -104,7 +104,7 @@ public class PortService implements IPortService
      * @return the string representation of the receipt.
      * @throws IOException id the connection doesn't work.
      */
-    public String getPortServices(int berthId, LocalDate dateOfArrival) throws IOException
+    public String getPortServices(String berthId, LocalDate dateOfArrival) throws IOException
     {
         //// TODO fix the JSON object with a DTO
         JsonObject object = new JsonObject();

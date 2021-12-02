@@ -1,9 +1,5 @@
 package BusinessLogicLayer;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import java.util.ArrayList;
-
 public class UrlConfig
 {
     /**
@@ -21,15 +17,6 @@ public class UrlConfig
     }
 
     /**
-     * sets the value of the url used when requesting port availability.
-     * @param requestPortUrl the url
-     */
-    public void setRequestPortUrl(String requestPortUrl)
-    {
-        this.requestPortUrl = requestPortUrl;
-    }
-
-    /**
      * The url used to order a port.
      */
     private String orderPortUrl;
@@ -44,15 +31,6 @@ public class UrlConfig
     }
 
     /**
-     * sets the value of the url used when ordering a port.
-     * @param portAvailabilityUrl the url
-     */
-    public void setOrderPortUrl(String portAvailabilityUrl)
-    {
-        this.requestPortUrl = portAvailabilityUrl;
-    }
-
-    /**
      * The url used to order a pilot.
      */
     private String orderPilotUrl;
@@ -64,20 +42,48 @@ public class UrlConfig
     public String getOrderPilotUrl() { return orderPilotUrl; }
 
     /**
-     * sets the value of the url used when ordering a pilot.
-     * @param orderPilotUrl the url to set.
+     * The url used to get the availability of the pilots.
      */
-    public void setOrderPilotUrl(String orderPilotUrl) { this.orderPilotUrl = orderPilotUrl; }
-
     private String pilotAvailabilityUrl;
 
+    /**
+     * Gets the url used to get the availability of the pilots.
+     * @return the URL as a string
+     */
     public String getPilotAvailabilityUrl()
     {
         return this.pilotAvailabilityUrl;
     }
 
-    public void setPilotAvailabilityUrl(String pilotAvailabilityUrl)
+    /**
+     * The url for ordering the stevedore services.
+     */
+    private String orderStevedoreUrl;
+
+    /**
+     * Gets the url for ordering the stevedore services.
+     * @return the url for ordering stevedore services
+     */
+    public String getOrderStevedoreUrl() { return this.orderStevedoreUrl; }
+
+    /**
+     * Initializes a new instance of the UrlConfig class.
+     * @param requestPortUrl the URL used to request port availability.
+     * @param orderPortUrl the URL used to order the Berth.
+     * @param orderPilotUrl the url used to order the pilot.
+     * @param pilotAvailabilityUrl the url used to get pilot availability.
+     * @param orderStevedoreUrl the url used to order the stevedore services.
+     */
+    public UrlConfig(String requestPortUrl,
+                               String orderPortUrl,
+                               String orderPilotUrl,
+                               String pilotAvailabilityUrl,
+                               String orderStevedoreUrl)
     {
+        this.requestPortUrl = requestPortUrl;
+        this.orderPilotUrl = orderPilotUrl;
+        this.orderPortUrl = orderPortUrl;
         this.pilotAvailabilityUrl = pilotAvailabilityUrl;
+        this.orderStevedoreUrl = orderStevedoreUrl;
     }
 }
