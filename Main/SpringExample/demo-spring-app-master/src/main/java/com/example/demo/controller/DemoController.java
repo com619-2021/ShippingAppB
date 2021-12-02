@@ -52,4 +52,11 @@ public class DemoController {
             return "error 400, bad request";
         }
     }
+
+    @GetMapping("/BookPilot")
+    public String bookPilot()
+    {
+        var book = new BookPilot();
+        return book.bookPilot();
+    }
 }
