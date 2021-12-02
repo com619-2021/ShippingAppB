@@ -11,16 +11,16 @@ It includes an in memory SQL database.
 
 ## Build
 
-	mvn clean package
+` mvn clean package `
 
-To build a docker image, run:
+## To build a docker image, run:
 
-	mvn clean package jib:dockerBuild
+` mvn clean package jib:dockerBuild `
 
-Then run using docker:
+## Then run using docker:
 
-	- The command: ``` docker run -d --mount type=bind,Source="[Where the config file is on local system]",target=/home/data -p [ports you want to use] -it demo:latest ```
-	- The command in example: ``` docker run -d --mount type=bind,Source="D:\Development\ShippingAppB\Main\SpringExample\demo-spring-app-master\config\",target=/home/data -p 8080:8080 -it demo:latest ```
+- The command: ` docker run -d --mount type=bind,Source="[Where the config file is on local system]",target=/home/data -p [ports you want to use] -it demo:latest `
+- The command in example: ` docker run -d --mount type=bind,Source="D:\Development\ShippingAppB\Main\SpringExample\demo-spring-app-master\config\",target=/home/data -p 8080:8080 -it demo:latest `
 
 ## Using
 
