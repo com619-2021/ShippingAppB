@@ -19,8 +19,8 @@ To build a docker image, run:
 
 Then run using docker:
 
-	- The command: ``` docker run -d --mount type=bind,Source="[Where the config file is on local system]",target=/home/data -p [ports you want to use] -it demo:latest ```
-	- The command in example: ``` docker run -d --mount type=bind,Source="D:\Development\ShippingAppB\Main\SpringExample\demo-spring-app-master\config\",target=/home/data -p 8080:8080 -it demo:latest ```
+	- The command: ` docker run -d --mount type=bind,Source="[Where the config file is on local system]",target=/home/data -p [ports you want to use] -it demo:latest `
+	- The command in example: ` docker run -d --mount type=bind,Source="D:\Development\ShippingAppB\Main\SpringExample\demo-spring-app-master\config\",target=/home/data -p 8080:8080 -it demo:latest `
 
 ## Using
 
