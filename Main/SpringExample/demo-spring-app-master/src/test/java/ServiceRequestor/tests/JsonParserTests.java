@@ -25,28 +25,28 @@ public class JsonParserTests
         Assert.isTrue(actual.equals(expected), "actual: " + actual);
     }
 
-//    @Test
-//    public void LoadConfigTest() throws IOException
-//    {
-//        //// TODO test this works on unix
-//        var actual = JsonParser.loadUrlConfig();
-//        var expected = new UrlConfig("test",
-//                "wibble",
-//                "floob",
-//                "wibblefloob",
-//                "floobwibble");
-//
-//        Assert.isTrue(expected.getRequestPortUrl().equals(actual.getRequestPortUrl()),
-//                "actual: port availability url: " + actual.getRequestPortUrl());
-//        Assert.isTrue(expected.getOrderPortUrl().equals(actual.getOrderPortUrl()),
-//                "actual is:" + actual.getRequestPortUrl());
-//        Assert.isTrue(expected.getRequestPortUrl().equals(actual.getRequestPortUrl()),
-//                "actual: port availability url: " + actual.getRequestPortUrl());
-//        Assert.isTrue(expected.getPilotAvailabilityUrl().equals(actual.getPilotAvailabilityUrl()),
-//                "actual: port availability url: " + actual.getPilotAvailabilityUrl());
-//        Assert.isTrue(expected.getOrderStevedoreUrl().equals(actual.getOrderStevedoreUrl()),
-//                "actual: port availability url: " + actual.getOrderStevedoreUrl());
-//    }
+    @Test
+    public void LoadConfigTest() throws IOException
+    {
+        var rootPath = System.getProperty("user.dir");
+        var actual = JsonParser.loadUrlConfig(rootPath + "/config");
+        var expected = new UrlConfig("test",
+                "wibble",
+                "floob",
+                "wibblefloob",
+                "floobwibble");
+
+        Assert.isTrue(expected.getRequestPortUrl().equals(actual.getRequestPortUrl()),
+                "actual: port availability url: " + actual.getRequestPortUrl());
+        Assert.isTrue(expected.getOrderPortUrl().equals(actual.getOrderPortUrl()),
+                "actual is:" + actual.getRequestPortUrl());
+        Assert.isTrue(expected.getRequestPortUrl().equals(actual.getRequestPortUrl()),
+                "actual: port availability url: " + actual.getRequestPortUrl());
+        Assert.isTrue(expected.getPilotAvailabilityUrl().equals(actual.getPilotAvailabilityUrl()),
+                "actual: port availability url: " + actual.getPilotAvailabilityUrl());
+        Assert.isTrue(expected.getOrderStevedoreUrl().equals(actual.getOrderStevedoreUrl()),
+                "actual: port availability url: " + actual.getOrderStevedoreUrl());
+    }
 
     @Test
     public void BookingPilotDtoParsingTest()

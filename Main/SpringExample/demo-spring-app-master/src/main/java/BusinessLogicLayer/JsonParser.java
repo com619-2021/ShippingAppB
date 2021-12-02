@@ -26,10 +26,8 @@ public class JsonParser
      * @return object containing required URLs
      * @throws IOException if there is no config file.
      */
-    public static UrlConfig loadUrlConfig() throws IOException
+    public static UrlConfig loadUrlConfig(String rootPath) throws IOException
     {
-        // var rootPath = System.getProperty("user.dir");
-        var rootPath = "/home/data";
         File operatorFile = new File(rootPath + "/URL_config.json");
         var scanner = new Scanner(operatorFile);
         String output = "";
