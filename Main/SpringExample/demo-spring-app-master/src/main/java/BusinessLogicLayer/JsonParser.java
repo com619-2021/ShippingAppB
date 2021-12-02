@@ -28,7 +28,8 @@ public class JsonParser
      */
     public static UrlConfig loadUrlConfig() throws IOException
     {
-        var rootPath = System.getProperty("user.dir");
+        // var rootPath = System.getProperty("user.dir");
+        var rootPath = "/home/data";
         File operatorFile = new File(rootPath + "/URL_config.json");
         var scanner = new Scanner(operatorFile);
         String output = "";
