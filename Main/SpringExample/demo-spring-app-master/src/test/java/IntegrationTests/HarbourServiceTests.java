@@ -20,7 +20,7 @@ public class HarbourServiceTests
     public void GetAvailabilityTest() throws IOException
     {
         var dayOfArrival = LocalDate.parse("2021-08-05");
-        var ship = new Ship(756.26, 78945.2, 484563.36, UUID.randomUUID(), ShipType.Cargo);
+        var ship = new Ship(756.26, 78945.2, 484563.36, UUID.randomUUID(), ShipType.CARGO);
         var uuid = UUID.randomUUID().toString();
         var berth = new Berth(uuid);
         var url = JsonParser.loadUrlConfig();
@@ -34,7 +34,7 @@ public class HarbourServiceTests
     public void OrderPilotTest() throws IOException
     {
         var dayOfArrival = LocalDate.parse("2021-08-05");
-        var ship = new Ship(756.26, 78945.2, 484563.36, UUID.randomUUID(), ShipType.Cargo);
+        var ship = new Ship(756.26, 78945.2, 484563.36, UUID.randomUUID(), ShipType.CARGO);
         var uuid = UUID.randomUUID().toString();
         var berth = new Berth(uuid);
         var url = JsonParser.loadUrlConfig();

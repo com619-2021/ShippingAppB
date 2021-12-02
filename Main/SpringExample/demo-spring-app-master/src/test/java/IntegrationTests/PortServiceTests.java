@@ -21,7 +21,7 @@ public class PortServiceTests
         var url = JsonParser.loadUrlConfig();
         var dayOfBooking = LocalDate.parse("2021-05-08");
         var uuid = UUID.randomUUID();
-        var portService = new PortService(789.2, 456.2, 321, dayOfBooking, url, uuid, ShipType.Ferry);
+        var portService = new PortService(789.2, 456.2, 321, dayOfBooking, url, uuid, ShipType.FERRY);
         var result = portService.getBerths();
 
         var gson = new Gson();
@@ -36,7 +36,7 @@ public class PortServiceTests
         var url = JsonParser.loadUrlConfig();
         var dayOfBooking = LocalDate.parse("2021-05-08");
         var uuid = UUID.randomUUID();
-        var portService = new PortService(789.2, 456.2, 321, dayOfBooking, url, uuid, ShipType.Ferry);
+        var portService = new PortService(789.2, 456.2, 321, dayOfBooking, url, uuid, ShipType.FERRY);
         var result = portService.getPortServices(UUID.randomUUID().toString(), dayOfBooking);
 
         var actual = JsonParser.parseJsonToReceipt(result);
