@@ -51,7 +51,7 @@ public class JsonParserTests
     @Test
     public void BookingPilotDtoParsingTest()
     {
-        var date = LocalDate.parse("2021-05-1");
+        var date = LocalDate.parse("2021-05-12");
         var uuid = UUID.fromString("38400000-8cf0-11bd-b23e-10b96e4ef00d");
         var ship = new Ship(34.5, 678.3, 67, uuid, ShipType.CARGO);
         var berth = new Berth("1");
