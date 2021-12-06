@@ -26,7 +26,14 @@ public class PortServiceTests
         var dayOfBooking = LocalDate.parse("2021-05-08");
         var uuid = UUID.randomUUID();
         var serviceCaller = Mockito.mock(IServiceCaller.class);
-        var portService = new PortService(789.2, 456.2, 321, dayOfBooking, uuid, ShipType.FERRY, serviceCaller);
+        var portService = new PortService(
+                789.2,
+                456.2,
+                321,
+                dayOfBooking,
+                uuid,
+                ShipType.FERRY,
+                serviceCaller);
         when(serviceCaller.getRequest(anyString())).thenReturn("[0, 1, 2]");
         var result = portService.getBerths();
 
@@ -43,10 +50,15 @@ public class PortServiceTests
         var uuid = UUID.randomUUID();
         var serviceCaller = Mockito.mock(IServiceCaller.class);
         when(serviceCaller.postRequest(anyString())).thenReturn("{\"uuid\": \"1-1-1-1\", \"totalPrice\": 45.6}");
-        var portService = new PortService(789.2, 456.2, 321, dayOfBooking, uuid, ShipType.FERRY, serviceCaller);
+        var portService = new PortService(789.2,
+                456.2
+                , 321,
+                dayOfBooking, uuid,
+                ShipType.FERRY,
+                serviceCaller);
         var result = portService.getPortServices(UUID.randomUUID().toString(), dayOfBooking);
 
         var actual = JsonParser.parseJsonToReceipt(result);
-        Assert.isTrue(actual.getClass() == Receipt.class, "the actual class was: " + actual.getClass());
+        Assert.isTrue(actual.getClass() == Receipt.class, "the actual class was: "+actual.getClass());
     }
 }

@@ -4,6 +4,7 @@ import BusinessLogicLayer.RestfulObjects.Berth;
 import BusinessLogicLayer.RestfulObjects.Receipt;
 import BusinessLogicLayer.RestfulObjects.StevedoreDto;
 import BusinessLogicLayer.RestfulObjects.StevedoreServicesOrdered;
+import ServiceRequestor.IServiceCaller;
 import ServiceRequestor.ServiceCaller;
 
 import java.io.IOException;
@@ -28,9 +29,9 @@ public class StevedoreService implements IStevedoreService
     private Berth berth;
 
     /**
-     * object containing all the URLs used for restful comms.
+     * object used for restful comms.
      */
-    private UrlConfig urlConfig;
+    private IServiceCaller serviceCaller;
 
     /**
      * Initializes a new instance of the StevedoreService class.
@@ -38,12 +39,16 @@ public class StevedoreService implements IStevedoreService
      * @param servicesOrdered the stevedore services that have been ordered.
      * @param berth the berth the ship is porting to.
      */
-    public StevedoreService(LocalDate dayOfArrival, StevedoreServicesOrdered servicesOrdered, Berth berth, UrlConfig urls)
+    public StevedoreService(
+            LocalDate dayOfArrival,
+            StevedoreServicesOrdered servicesOrdered,
+            Berth berth,
+            IServiceCaller serviceCaller)
     {
         this.dayOfArrival = dayOfArrival;
         this.servicesOrdered = servicesOrdered;
         this.berth = berth;
-        this.urlConfig = urls;
+        this.serviceCaller = serviceCaller;
     }
 
     /**
@@ -56,9 +61,7 @@ public class StevedoreService implements IStevedoreService
     {
         var dto = new StevedoreDto(this.dayOfArrival.toString(), this.servicesOrdered, this.berth);
         var json = JsonParser.StevedoreDtoToJson(dto);
-        var url = new URL(this.urlConfig.getOrderStevedoreUrl());
-        var serviceCaller = new ServiceCaller(url);
-        var response = serviceCaller.postRequest(json);
+        var response = this.serviceCaller.postRequest(json);
         return JsonParser.parseJsonToReceipt(response);
     }
 }
