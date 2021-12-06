@@ -98,7 +98,7 @@ public class JsonParserTests
     @Test
     public void ExpectedObjectFromJsonShipmentOrder()
     {
-        var json = "{ \"shipType\": \"PASSENGER\", \"totalWeight\": 1234.78, \"steveDoreServices\": {\"cargoOn\": true, \"cargoOff\": false, \"waterRequested\": true, \"wasteRemovalRequested\": true}}";
+        var json = "{ \"shipType\": \"PASSENGER\", \"usingTeuContainers\": true, \"numberOfContainers\": 50, \"numberOfPassengers\": 0, \"steveDoreServices\": {\"cargoOn\": true, \"cargoOff\": false, \"waterRequested\": true, \"wasteRemovalRequested\": true}}";
         var obj = JsonParser.GetShipmentDetails(json);
 
         Assert.isTrue(obj.getClass() == OrderShipmentDto.class, "The types were not the same: " + obj.getClass());

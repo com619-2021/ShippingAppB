@@ -8,26 +8,44 @@ public class OrderShipmentDto
     private final ShipType shipType;
 
     /**
-     * the total weight of the shipment.
-     */
-    private final double totalWeight;
-
-    /**
      * the stevedore services requested by customer.
      */
     private final StevedoreServicesOrdered stevedoreServices;
 
     /**
+     * Whether the cargo shipment is in TEU or 2TEU containers
+     */
+    private final boolean usingTeuContainers;
+
+    /**
+     * The number of containers going on board.
+     */
+    private final double numberOfContainers;
+
+    /**
+     * The number of passengers on board.
+     */
+    private final double numberOfPassengers;
+
+    /**
      * Initializes a new instance of the OrderShipmentDto class.
      * @param shipType the type of ship needed.
-     * @param totalWeight the total weight of the shipment.
      * @param stevedoreServices the stevedore services requested by customer.
+     * @param usingTeuContainers whether the customer is using TEU or 2 TEU containers.
+     * @param numberOfContainers number of containers customer wants shipping.
+     * @param numberOfPassengers number of passengers customer wants transporting.
      */
-    public OrderShipmentDto(ShipType shipType, double totalWeight, StevedoreServicesOrdered stevedoreServices)
+    public OrderShipmentDto(ShipType shipType,
+                            StevedoreServicesOrdered stevedoreServices,
+                            boolean usingTeuContainers,
+                            double numberOfContainers,
+                            double numberOfPassengers)
     {
         this.shipType = shipType;
-        this.totalWeight = totalWeight;
         this.stevedoreServices = stevedoreServices;
+        this.usingTeuContainers = usingTeuContainers;
+        this.numberOfContainers = numberOfContainers;
+        this.numberOfPassengers = numberOfPassengers;
     }
 
     /**
@@ -40,20 +58,26 @@ public class OrderShipmentDto
     }
 
     /**
-     * Gets the total weight of the shipment
-     * @return the total weight of shipment.
-     */
-    public double getTotalWeight()
-    {
-        return totalWeight;
-    }
-
-    /**
      * Gets the stevedore services requested by customer.
      * @return the stevedore services requested by customer.
      */
     public StevedoreServicesOrdered getStevedoreServices()
     {
         return stevedoreServices;
+    }
+
+    public boolean isUsingTeuContainers()
+    {
+        return usingTeuContainers;
+    }
+
+    public double getNumberOfContainers()
+    {
+        return numberOfContainers;
+    }
+
+    public double getNumberOfPassengers()
+    {
+        return numberOfPassengers;
     }
 }

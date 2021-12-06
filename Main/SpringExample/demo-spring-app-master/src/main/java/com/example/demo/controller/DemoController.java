@@ -1,9 +1,11 @@
 package com.example.demo.controller;
 
+import BusinessLogicLayer.JsonParser;
 import com.example.demo.dto.Demo;
 import com.example.demo.dto.Result;
 import com.example.demo.repository.DemoRepository;
 import lombok.extern.java.Log;
+import org.apache.commons.lang3.NotImplementedException;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.MessageFormat;
@@ -42,17 +44,6 @@ public class DemoController {
         return new Result( "You POSTed a Demo object with an id of: " + demo.getId());
     }
 
-    @GetMapping("/book")
-    public String bookingTest(@RequestParam(value="details") String details){
-        try{
-            var wibble = details.split(":");
-            return String.format("weight: " + wibble[0] + ", volume: " + wibble[1]);
-        }
-        catch(Exception e){
-            return "error 400, bad request";
-        }
-    }
-
     @GetMapping("/BookPilot")
     public String bookPilot()
     {
@@ -60,9 +51,18 @@ public class DemoController {
         return book.bookPilot();
     }
 
-    @GetMapping("/OrderShipment")
+    @PostMapping("/OrderShipment")
     public String orderShipment(@RequestParam(value="details") String details)
     {
-        return null;
+        try
+        {
+            var shipmentDetails = JsonParser.GetShipmentDetails(details);
+
+            throw new NotImplementedException();
+        }
+        catch(Exception e)
+        {
+            return "Error:" + e.getMessage();
+        }
     }
 }
