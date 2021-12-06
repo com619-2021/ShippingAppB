@@ -59,4 +59,10 @@ public class DemoController {
         var book = new BookPilot();
         return book.bookPilot();
     }
+
+    @GetMapping("/OrderShipment")
+    public String orderShipment(@RequestParam(value="details") String details)
+    {
+        return null;
+    }
 }

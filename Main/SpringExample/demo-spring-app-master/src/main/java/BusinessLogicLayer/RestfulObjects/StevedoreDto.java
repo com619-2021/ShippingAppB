@@ -1,7 +1,5 @@
 package BusinessLogicLayer.RestfulObjects;
 
-import BusinessLogicLayer.StevedoreService;
-
 public class StevedoreDto
 {
     private String dayOfArrival;

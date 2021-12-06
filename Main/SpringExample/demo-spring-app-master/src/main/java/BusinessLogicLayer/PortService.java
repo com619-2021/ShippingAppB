@@ -1,16 +1,12 @@
 package BusinessLogicLayer;
 
-import BusinessLogicLayer.RestfulObjects.Berth;
 import BusinessLogicLayer.RestfulObjects.BookBerthDTO;
 import BusinessLogicLayer.RestfulObjects.Ship;
 import BusinessLogicLayer.RestfulObjects.ShipType;
-import ServiceRequestor.IServiceCaller;
-import ServiceRequestor.ServiceCaller;
+import UnitTests.IServiceCaller;
 import com.google.gson.JsonObject;
-import io.swagger.v3.core.util.Json;
 
 import java.io.IOException;
-import java.net.URL;
 import java.time.LocalDate;
 import java.util.UUID;
 

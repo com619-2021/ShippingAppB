@@ -1,4 +1,4 @@
-package ServiceRequestor;
+package UnitTests;
 
 
 import org.jboss.logging.Logger;

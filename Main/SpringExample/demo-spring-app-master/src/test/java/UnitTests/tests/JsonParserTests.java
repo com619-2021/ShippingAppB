@@ -1,4 +1,4 @@
-package ServiceRequestor.tests;
+package UnitTests.tests;
 
 import BusinessLogicLayer.JsonParser;
 import BusinessLogicLayer.RestfulObjects.*;
@@ -93,5 +93,14 @@ public class JsonParserTests
         Assert.isTrue(actual.getTotalPrice() == expected.getTotalPrice(), "actual price was: "
                 + actual.getTotalPrice());
         Assert.isTrue(actual.getUuid().equals(expected.getUuid()), "actual was: " + actual.getUuid());
+    }
+
+    @Test
+    public void ExpectedObjectFromJsonShipmentOrder()
+    {
+        var json = "{ \"shipType\": \"PASSENGER\", \"totalWeight\": 1234.78, \"steveDoreServices\": {\"cargoOn\": true, \"cargoOff\": false, \"waterRequested\": true, \"wasteRemovalRequested\": true}}";
+        var obj = JsonParser.GetShipmentDetails(json);
+
+        Assert.isTrue(obj.getClass() == OrderShipmentDto.class, "The types were not the same: " + obj.getClass());
     }
 }

@@ -1,4 +1,4 @@
-package ServiceRequestor;
+package UnitTests;
 
 import com.sun.istack.logging.Logger;
 

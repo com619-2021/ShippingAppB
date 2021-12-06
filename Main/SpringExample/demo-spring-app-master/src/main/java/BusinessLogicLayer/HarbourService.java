@@ -1,7 +1,7 @@
 package BusinessLogicLayer;
 
 import BusinessLogicLayer.RestfulObjects.*;
-import ServiceRequestor.IServiceCaller;
+import UnitTests.IServiceCaller;
 
 import java.io.IOException;
 import java.time.LocalDate;

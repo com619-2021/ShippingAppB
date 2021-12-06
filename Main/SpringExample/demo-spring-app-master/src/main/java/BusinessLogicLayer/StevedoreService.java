@@ -4,11 +4,9 @@ import BusinessLogicLayer.RestfulObjects.Berth;
 import BusinessLogicLayer.RestfulObjects.Receipt;
 import BusinessLogicLayer.RestfulObjects.StevedoreDto;
 import BusinessLogicLayer.RestfulObjects.StevedoreServicesOrdered;
-import ServiceRequestor.IServiceCaller;
-import ServiceRequestor.ServiceCaller;
+import UnitTests.IServiceCaller;
 
 import java.io.IOException;
-import java.net.URL;
 import java.time.LocalDate;
 
 public class StevedoreService implements IStevedoreService

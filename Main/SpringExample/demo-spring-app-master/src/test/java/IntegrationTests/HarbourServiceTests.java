@@ -3,10 +3,8 @@ package IntegrationTests;
 import BusinessLogicLayer.HarbourService;
 import BusinessLogicLayer.JsonParser;
 import BusinessLogicLayer.RestfulObjects.*;
-import ServiceRequestor.IServiceCaller;
-import ServiceRequestor.ServiceCaller;
+import UnitTests.IServiceCaller;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.util.Assert;
 

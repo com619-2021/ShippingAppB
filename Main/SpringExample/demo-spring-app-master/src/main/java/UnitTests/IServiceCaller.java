@@ -1,7 +1,6 @@
-package ServiceRequestor;
+package UnitTests;
 
 import java.io.IOException;
-import java.net.URL;
 
 public interface IServiceCaller
 {

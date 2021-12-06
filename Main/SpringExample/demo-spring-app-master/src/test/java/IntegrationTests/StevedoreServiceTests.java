@@ -1,11 +1,10 @@
 package IntegrationTests;
 
-import BusinessLogicLayer.JsonParser;
 import BusinessLogicLayer.RestfulObjects.Berth;
 import BusinessLogicLayer.RestfulObjects.Receipt;
 import BusinessLogicLayer.RestfulObjects.StevedoreServicesOrdered;
 import BusinessLogicLayer.StevedoreService;
-import ServiceRequestor.IServiceCaller;
+import UnitTests.IServiceCaller;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.util.Assert;

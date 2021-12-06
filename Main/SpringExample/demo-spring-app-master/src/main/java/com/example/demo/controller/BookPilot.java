@@ -5,7 +5,7 @@ import BusinessLogicLayer.JsonParser;
 import BusinessLogicLayer.RestfulObjects.Berth;
 import BusinessLogicLayer.RestfulObjects.Ship;
 import BusinessLogicLayer.RestfulObjects.ShipType;
-import ServiceRequestor.ServiceCaller;
+import UnitTests.ServiceCaller;
 
 import java.net.URL;
 import java.time.LocalDate;
