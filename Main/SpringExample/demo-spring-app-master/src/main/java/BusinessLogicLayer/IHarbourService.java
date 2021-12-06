@@ -1,11 +1,10 @@
 package BusinessLogicLayer;
 
 import java.io.IOException;
-import java.time.LocalDate;
 
 public interface IHarbourService
 {
-    public boolean getPilotAvailabilities() throws IOException;
+    boolean getPilotAvailabilities() throws IOException;
 
-    public String postPilotOrder() throws IOException;
+    String postPilotOrder() throws IOException;
 }

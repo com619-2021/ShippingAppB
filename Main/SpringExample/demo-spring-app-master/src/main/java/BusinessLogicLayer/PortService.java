@@ -4,6 +4,7 @@ import BusinessLogicLayer.RestfulObjects.Berth;
 import BusinessLogicLayer.RestfulObjects.BookBerthDTO;
 import BusinessLogicLayer.RestfulObjects.Ship;
 import BusinessLogicLayer.RestfulObjects.ShipType;
+import ServiceRequestor.IServiceCaller;
 import ServiceRequestor.ServiceCaller;
 import com.google.gson.JsonObject;
 import io.swagger.v3.core.util.Json;
@@ -49,9 +50,9 @@ public class PortService implements IPortService
     private final ShipType shipType;
 
     /**
-     * the object that contains url paths.
+     * the object that is used for REST comms.
      */
-    private UrlConfig urlConfig;
+    private IServiceCaller serviceCaller;
 
     /**
      * Initializes a new instance of the PortService class.
@@ -64,17 +65,17 @@ public class PortService implements IPortService
                        double shipLength,
                        double shipWidth,
                        LocalDate dayOfBooking,
-                       UrlConfig urlConfig,
                        UUID uuid,
-                       ShipType shipType)
+                       ShipType shipType,
+                       IServiceCaller serviceCaller)
     {
         this.shipDraft = shipDraft;
         this.shipLength = shipLength;
         this.shipWidth = shipWidth;
         this.dayOfBooking = dayOfBooking;
-        this.urlConfig = urlConfig;
         this.uuid = uuid;
         this.shipType = shipType;
+        this.serviceCaller = serviceCaller;
     }
 
     /**
@@ -89,11 +90,7 @@ public class PortService implements IPortService
         var dto = new BookBerthDTO(this.dayOfBooking, ship);
         var params = JsonParser.parsePortDtoToJson(dto);
 
-        var url = new URL(this.urlConfig.getRequestPortUrl());
-       var serviceCaller = new ServiceCaller(url);
-
-        var availability = serviceCaller.getRequest(params);
-
+        var availability = this.serviceCaller.getRequest(params);
         return availability;
     }
 
@@ -110,10 +107,8 @@ public class PortService implements IPortService
         JsonObject object = new JsonObject();
         object.addProperty("BerthId", berthId);
         object.addProperty("dayOfShipArrival", dateOfArrival.toString());
-        var url = new URL(this.urlConfig.getOrderPortUrl());
-        var serviceCaller = new ServiceCaller(url);
-        var receipt = serviceCaller.postRequest(object.toString());
 
+        var receipt = this.serviceCaller.postRequest(object.toString());
         return receipt;
     }
 }
