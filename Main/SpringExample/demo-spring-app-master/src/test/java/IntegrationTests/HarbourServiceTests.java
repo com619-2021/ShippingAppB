@@ -50,9 +50,7 @@ public class HarbourServiceTests
         when(serviceCaller.postRequest(anyString())).thenReturn("{\"uuid\": \"1-1-1-1\", \"totalPrice\": 45.6}");
         var harbourService = new HarbourService(ship, berth, dayOfArrival, serviceCaller);
 
-        var result = harbourService.postPilotOrder();
-
-        var actual = JsonParser.parseJsonToReceipt(result);
+        var actual = harbourService.postPilotOrder();
         Assert.isTrue(actual.getClass() == Receipt.class, "the result had type of: " + Receipt.class);
     }
 }

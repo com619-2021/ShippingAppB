@@ -1,13 +1,16 @@
 package BusinessLogicLayer;
 
 import BusinessLogicLayer.RestfulObjects.BookBerthDTO;
+import BusinessLogicLayer.RestfulObjects.Receipt;
 import BusinessLogicLayer.RestfulObjects.Ship;
 import BusinessLogicLayer.RestfulObjects.ShipType;
 import UnitTests.IServiceCaller;
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.UUID;
 
 /**
@@ -80,31 +83,31 @@ public class PortService implements IPortService
      * @throws IllegalArgumentException when the params cannot be converted to strings
      * @throws IOException occurs if the connection is not
      */
-    public String getBerths() throws IllegalArgumentException, IOException
+    public ArrayList<String> getBerthAvailability() throws IllegalArgumentException, IOException
     {
         var ship = new Ship(this.shipDraft, this.shipLength, this.shipWidth, this.uuid, this.shipType);
         var dto = new BookBerthDTO(this.dayOfBooking, ship);
         var params = JsonParser.parsePortDtoToJson(dto);
 
         var availability = this.serviceCaller.getRequest(params);
-        return availability;
+        var gson = new Gson();
+        return gson.fromJson(availability, ArrayList.class);
     }
 
     /**
      * orders the berth
      * @param berthId the id of the berth to use
-     * @param dateOfArrival the date the ship is due.
      * @return the string representation of the receipt.
      * @throws IOException id the connection doesn't work.
      */
-    public String getPortServices(String berthId, LocalDate dateOfArrival) throws IOException
+    public Receipt orderPort(String berthId) throws IOException
     {
         //// TODO fix the JSON object with a DTO
         JsonObject object = new JsonObject();
         object.addProperty("BerthId", berthId);
-        object.addProperty("dayOfShipArrival", dateOfArrival.toString());
+        object.addProperty("dayOfShipArrival", this.dayOfBooking.toString());
 
         var receipt = this.serviceCaller.postRequest(object.toString());
-        return receipt;
+        return JsonParser.parseJsonToReceipt(receipt);
     }
 }

@@ -29,7 +29,7 @@ public class BookPilot
             }
 
             var order = harbourService.postPilotOrder();
-            return order;
+            return ""+order.getTotalPrice();
         }
         catch (Exception e)
         {

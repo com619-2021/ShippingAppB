@@ -35,11 +35,7 @@ public class PortServiceTests
                 ShipType.FERRY,
                 serviceCaller);
         when(serviceCaller.getRequest(anyString())).thenReturn("[0, 1, 2]");
-        var result = portService.getBerths();
-
-        var gson = new Gson();
-        var actual = gson.fromJson(result, ArrayList.class);
-
+        var actual = portService.getBerthAvailability();
         Assert.isTrue(actual.getClass() == ArrayList.class, "the result was: " + actual.getClass());
     }
 
@@ -56,9 +52,7 @@ public class PortServiceTests
                 dayOfBooking, uuid,
                 ShipType.FERRY,
                 serviceCaller);
-        var result = portService.getPortServices(UUID.randomUUID().toString(), dayOfBooking);
-
-        var actual = JsonParser.parseJsonToReceipt(result);
+        var actual = portService.orderPort(UUID.randomUUID().toString());
         Assert.isTrue(actual.getClass() == Receipt.class, "the actual class was: "+actual.getClass());
     }
 }

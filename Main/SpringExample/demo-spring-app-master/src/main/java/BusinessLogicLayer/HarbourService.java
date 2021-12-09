@@ -65,11 +65,11 @@ public class HarbourService implements IHarbourService
      * @throws IOException thrown if connection cannot be established
      */
     @Override
-    public String postPilotOrder() throws IOException
+    public Receipt postPilotOrder() throws IOException
     {
         var dto = new BookPilotDto(dayOfArrival, this.ship, this.berth);
         var params = JsonParser.parseBookPilotDtoToJson(dto);
         var receipt = this.serviceCaller.postRequest(params);
-        return receipt;
+        return JsonParser.parseJsonToReceipt(receipt);
     }
 }

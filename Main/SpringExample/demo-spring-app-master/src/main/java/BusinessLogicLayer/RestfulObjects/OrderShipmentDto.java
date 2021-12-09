@@ -28,24 +28,32 @@ public class OrderShipmentDto
     private final double numberOfPassengers;
 
     /**
+     * the day of shipping
+     */
+    private final String dayOfArrival;
+
+    /**
      * Initializes a new instance of the OrderShipmentDto class.
      * @param shipType the type of ship needed.
      * @param stevedoreServices the stevedore services requested by customer.
      * @param usingTeuContainers whether the customer is using TEU or 2 TEU containers.
      * @param numberOfContainers number of containers customer wants shipping.
      * @param numberOfPassengers number of passengers customer wants transporting.
+     * @param dayOfArrival the day the shipment is expected to be delivered.
      */
     public OrderShipmentDto(ShipType shipType,
                             StevedoreServicesOrdered stevedoreServices,
                             boolean usingTeuContainers,
                             double numberOfContainers,
-                            double numberOfPassengers)
+                            double numberOfPassengers,
+                            String dayOfArrival)
     {
         this.shipType = shipType;
         this.stevedoreServices = stevedoreServices;
         this.usingTeuContainers = usingTeuContainers;
         this.numberOfContainers = numberOfContainers;
         this.numberOfPassengers = numberOfPassengers;
+        this.dayOfArrival = dayOfArrival;
     }
 
     /**
@@ -79,5 +87,10 @@ public class OrderShipmentDto
     public double getNumberOfPassengers()
     {
         return numberOfPassengers;
+    }
+
+    public String getDayOfArrival()
+    {
+        return dayOfArrival;
     }
 }

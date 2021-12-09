@@ -74,5 +74,10 @@ public class Ship
         this.uuid = uuid;
         this.type = shipType;
     }
+
+    public UUID getUuid()
+    {
+        return uuid;
+    }
 }
 
