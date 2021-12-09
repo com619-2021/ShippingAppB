@@ -1,11 +1,9 @@
 package IntegrationTests;
 
-import BusinessLogicLayer.JsonParser;
 import BusinessLogicLayer.PortService;
 import BusinessLogicLayer.RestfulObjects.Receipt;
 import BusinessLogicLayer.RestfulObjects.ShipType;
 import UnitTests.IServiceCaller;
-import com.google.gson.Gson;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.util.Assert;
