@@ -27,4 +27,9 @@ public class UserController {
     public void deleteUser(@PathVariable("userId") Long id){
         userService.deleteUser(id);
     }
+
+    @DeleteMapping(path="{fname,lname}")
+    public void deleteUserByName(@PathVariable("fname") String fname,@PathVariable("lname") String lname){
+        userService.deleteUserByName(fname,lname);
+    }
 }

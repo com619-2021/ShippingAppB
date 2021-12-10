@@ -36,6 +36,10 @@ public class UserService {
     }
 
     public void deleteUser(Long id){
-         //WRITE HERE
+        userRepository.deleteById(id);
+    }
+
+    public void deleteUserByName(String fName, String lName){
+        userRepository.deleteByName(fName,lName);
     }
 }

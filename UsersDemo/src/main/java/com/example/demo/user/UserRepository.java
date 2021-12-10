@@ -11,4 +11,8 @@ public interface UserRepository extends JpaRepository <User,Long> {
 
     @Query ( "SELECT u FROM User u WHERE u.pswd=?1 AND u.SName=?1 ")
     Optional<User> findUserByCred(String pass, String name);
+
+
+    long deleteByName(String fname, String lname);
+
 }
