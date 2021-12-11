@@ -20,13 +20,11 @@ public class DemoController {
 
     private final DemoRepository demoRepository;
 
-    private final UrlConfig urlConfig = JsonParser.loadUrlConfig("/home/data");
-
     /**
      * Alternative to autowiring, use an autowire constructor.
      * @param demoRepository demo repository for spring boot to autowire
      */
-    public DemoController(DemoRepository demoRepository) throws IOException
+    public DemoController(DemoRepository demoRepository)
     {
         this.demoRepository = demoRepository;
     }
@@ -62,13 +60,14 @@ public class DemoController {
     {
         try
         {
+            var urlConfig = JsonParser.loadUrlConfig("/home/data");
             var shipmentDetails = JsonParser.GetShipmentDetails(details);
             var serviceCaller = new ServiceCaller();
             var portService = new PortService(serviceCaller);
             var harbourService = new HarbourService(serviceCaller);
             var stevedoreService = new StevedoreService(serviceCaller);
 
-            var orderShipment = new OrderShipment(shipmentDetails, portService, harbourService, stevedoreService, this.urlConfig);
+            var orderShipment = new OrderShipment(shipmentDetails, portService, harbourService, stevedoreService, urlConfig);
             var result = orderShipment.PlaceOrder();
 
             return result;
