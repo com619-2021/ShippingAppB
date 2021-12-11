@@ -1,4 +1,4 @@
-package UnitTests;
+package RestfulComms;
 
 
 import org.jboss.logging.Logger;

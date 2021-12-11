@@ -5,8 +5,6 @@ import BusinessLogicLayer.RestfulObjects.Berth;
 import BusinessLogicLayer.RestfulObjects.OrderShipmentDto;
 import BusinessLogicLayer.RestfulObjects.Ship;
 import BusinessLogicLayer.RestfulObjects.ShipType;
-import UnitTests.ServiceCaller;
-import com.google.gson.Gson;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -19,33 +17,42 @@ public class OrderShipment
      */
     private final OrderShipmentDto orderShipmentDto;
 
+    private final UrlConfig urlConfig;
+
+    private final IPortService portService;
+
+    private final IHarbourService harbourService;
+
+    private final IStevedoreService stevedoreService;
+
     /**
      * Initializes a new instance of the OrderShipmentDto.
      * @param orderShipmentDto The customer's requirements.
+     * @param portService the object used to book port services
+     * @param harbourService the object used to book harbour services.
+     * @param stevedoreService the object used to book stevedore services.
+     * @param urlConfig the object holding all URLs for bookings
      */
     public OrderShipment(
             OrderShipmentDto orderShipmentDto,
-            IPortService portServiceCaller,
-            IHarbourService harbourServiceCaller)
+            IPortService portService,
+            IHarbourService harbourService,
+            IStevedoreService stevedoreService,
+            UrlConfig urlConfig)
     {
         this.orderShipmentDto = orderShipmentDto;
+        this.portService = portService;
+        this.harbourService = harbourService;
+        this.stevedoreService = stevedoreService;
+        this.urlConfig = urlConfig;
     }
 
     private String PlaceOrder() throws Exception
     {
         var ship = this.chooseShip();
-        var url = JsonParser.loadUrlConfig("/home/data");
-        var portServiceCaller = new ServiceCaller(new URL(url.getRequestPortUrl()));
-        var portService = new PortService(
-                ship.getDraft(),
-                ship.getLength(),
-                ship.getWidth(),
-                LocalDate.parse(this.orderShipmentDto.getDayOfArrival()),
-                ship.getUuid(),
-                this.orderShipmentDto.getShipType(),
-                portServiceCaller);
-
-        var berths = portService.getBerthAvailability();
+        var getBerthAvailabilityUrl = new URL(this.urlConfig.getRequestPortUrl());
+        var dateOfArrival = LocalDate.parse(this.orderShipmentDto.getDayOfArrival());
+        var berths = this.portService.getBerthAvailability(ship, dateOfArrival, getBerthAvailabilityUrl);
 
         if (berths.isEmpty())
         {
@@ -53,31 +60,19 @@ public class OrderShipment
         }
 
         var berth = new Berth(berths.get(0));
-        var harbourAvailabilityServiceCaller = new ServiceCaller(new URL(url.getPilotAvailabilityUrl()));
-        var harbourService = new HarbourService(
-                ship,
-                berth,
-                LocalDate.parse(this.orderShipmentDto.getDayOfArrival()),
-                harbourAvailabilityServiceCaller);
 
-        var pilotAvailable = harbourService.getPilotAvailabilities();
+        var pilotAvailable = this.harbourService.getPilotAvailabilities(new URL(urlConfig.getPilotAvailabilityUrl()));
 
         if(!pilotAvailable)
         {
             throw new Exception("There are no available pilots");
         }
 
-        var stevedoreServiceCaller = new ServiceCaller(new URL(url.getOrderStevedoreUrl()));
-
-        var stevedoreService = new StevedoreService(
-                LocalDate.parse(this.orderShipmentDto.getDayOfArrival()),
-                this.orderShipmentDto.getStevedoreServices(),
-                berth,
-                stevedoreServiceCaller);
-
-        var stevedoreReceipt = stevedoreService.orderStevedore();
-        var berthReceipt = portService.orderPort(berth.getBerthId());
-        var pilotReceipt = harbourService.postPilotOrder();
+        var stevedoreReceipt = this.stevedoreService.orderStevedore(new URL(this.urlConfig.getOrderStevedoreUrl()));
+        var url = new URL(this.urlConfig.getOrderPortUrl());
+        var dayOfBooking = LocalDate.parse(this.orderShipmentDto.getDayOfArrival());
+        var berthReceipt = this.portService.orderPort(berth.getBerthId(), dayOfBooking, url);
+        var pilotReceipt = this.harbourService.postPilotOrder(new URL(urlConfig.getOrderPilotUrl()));
         var total = stevedoreReceipt.getTotalPrice() + berthReceipt.getTotalPrice() + pilotReceipt.getTotalPrice();
         return "" + total;
     }

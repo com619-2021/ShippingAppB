@@ -1,17 +1,18 @@
 package IntegrationTests;
 
 import BusinessLogicLayer.HarbourService;
-import BusinessLogicLayer.JsonParser;
 import BusinessLogicLayer.RestfulObjects.*;
-import UnitTests.IServiceCaller;
+import RestfulComms.IServiceCaller;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.util.Assert;
 
 import java.io.IOException;
+import java.net.URL;
 import java.time.LocalDate;
 import java.util.UUID;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
@@ -30,10 +31,10 @@ public class HarbourServiceTests
         var berth = new Berth(uuid);
 
         var serviceCaller = Mockito.mock(IServiceCaller.class);
-        when(serviceCaller.getRequest(anyString())).thenReturn("{\"possible\": true }");
+        when(serviceCaller.getRequest(any(), anyString())).thenReturn("{\"possible\": true }");
         var harbourService = new HarbourService(ship, berth, dayOfArrival, serviceCaller);
 
-        var result = harbourService.getPilotAvailabilities();
+        var result = harbourService.getPilotAvailabilities(new URL("wibble"));
 
         Assert.isTrue(result, "the result was: " + result);
     }
@@ -47,10 +48,10 @@ public class HarbourServiceTests
         var berth = new Berth(uuid);
 
         var serviceCaller = Mockito.mock(IServiceCaller.class);
-        when(serviceCaller.postRequest(anyString())).thenReturn("{\"uuid\": \"1-1-1-1\", \"totalPrice\": 45.6}");
+        when(serviceCaller.postRequest(any(), anyString())).thenReturn("{\"uuid\": \"1-1-1-1\", \"totalPrice\": 45.6}");
         var harbourService = new HarbourService(ship, berth, dayOfArrival, serviceCaller);
 
-        var actual = harbourService.postPilotOrder();
+        var actual = harbourService.postPilotOrder(new URL("wibble"));
         Assert.isTrue(actual.getClass() == Receipt.class, "the result had type of: " + Receipt.class);
     }
 }

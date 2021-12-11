@@ -4,9 +4,10 @@ import BusinessLogicLayer.RestfulObjects.Berth;
 import BusinessLogicLayer.RestfulObjects.Receipt;
 import BusinessLogicLayer.RestfulObjects.StevedoreDto;
 import BusinessLogicLayer.RestfulObjects.StevedoreServicesOrdered;
-import UnitTests.IServiceCaller;
+import RestfulComms.IServiceCaller;
 
 import java.io.IOException;
+import java.net.URL;
 import java.time.LocalDate;
 
 public class StevedoreService implements IStevedoreService
@@ -53,13 +54,14 @@ public class StevedoreService implements IStevedoreService
      * Orders the stevedore services using a ReST POST request.
      * @return the string result from the post request.
      * @throws IOException IO exception thrown if the URL cannot find the endpoint.
+     * @param url the url to call the service with.
      */
     @Override
-    public Receipt orderStevedore() throws IOException
+    public Receipt orderStevedore(URL url) throws IOException
     {
         var dto = new StevedoreDto(this.dayOfArrival.toString(), this.servicesOrdered, this.berth);
         var json = JsonParser.StevedoreDtoToJson(dto);
-        var response = this.serviceCaller.postRequest(json);
+        var response = this.serviceCaller.postRequest(url, json);
         return JsonParser.parseJsonToReceipt(response);
     }
 }

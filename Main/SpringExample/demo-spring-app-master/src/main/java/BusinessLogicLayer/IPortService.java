@@ -1,8 +1,11 @@
 package BusinessLogicLayer;
 
 import BusinessLogicLayer.RestfulObjects.Receipt;
+import BusinessLogicLayer.RestfulObjects.Ship;
 
 import java.io.IOException;
+import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public interface IPortService
@@ -13,7 +16,7 @@ public interface IPortService
      * @throws IllegalArgumentException when the params cannot be converted to strings
      * @throws IOException occurs if the connection is not
      */
-    ArrayList<String> getBerthAvailability() throws IllegalArgumentException, IOException;
+    ArrayList<String> getBerthAvailability(Ship ship, LocalDate dayOfArrival, URL url) throws IllegalArgumentException, IOException;
 
     /**
      * orders the berth
@@ -21,5 +24,5 @@ public interface IPortService
      * @return the string representation of the receipt.
      * @throws IOException id the connection doesn't work.
      */
-    Receipt orderPort(String berthId) throws IOException;
+    Receipt orderPort(String berthId, LocalDate dayOfBooking, URL url) throws IOException;
 }

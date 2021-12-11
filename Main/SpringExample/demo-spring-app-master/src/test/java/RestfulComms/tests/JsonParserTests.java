@@ -1,4 +1,4 @@
-package UnitTests.tests;
+package RestfulComms.tests;
 
 import BusinessLogicLayer.JsonParser;
 import BusinessLogicLayer.RestfulObjects.*;
