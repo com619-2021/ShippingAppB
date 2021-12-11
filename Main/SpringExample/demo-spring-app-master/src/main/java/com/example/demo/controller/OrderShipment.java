@@ -68,7 +68,11 @@ public class OrderShipment
             throw new Exception("There are no available pilots");
         }
 
-        var stevedoreReceipt = this.stevedoreService.orderStevedore(new URL(this.urlConfig.getOrderStevedoreUrl()));
+        var stevedoreReceipt = this.stevedoreService.orderStevedore(
+                new URL(this.urlConfig.getOrderStevedoreUrl()),
+                dateOfArrival,
+                this.orderShipmentDto.getStevedoreServices(),
+                berth);
         var url = new URL(this.urlConfig.getOrderPortUrl());
         var dayOfBooking = LocalDate.parse(this.orderShipmentDto.getDayOfArrival());
         var berthReceipt = this.portService.orderPort(berth.getBerthId(), dayOfBooking, url);

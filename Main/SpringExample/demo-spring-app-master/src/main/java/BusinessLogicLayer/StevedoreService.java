@@ -13,40 +13,16 @@ import java.time.LocalDate;
 public class StevedoreService implements IStevedoreService
 {
     /**
-     * The day the ship is due to arrive
-     */
-    private LocalDate dayOfArrival;
-
-    /**
-     * The services that have been ordered
-     */
-    private StevedoreServicesOrdered servicesOrdered;
-
-    /**
-     * The berth the ship is porting at.
-     */
-    private Berth berth;
-
-    /**
      * object used for restful comms.
      */
     private IServiceCaller serviceCaller;
 
     /**
      * Initializes a new instance of the StevedoreService class.
-     * @param dayOfArrival the day the ship is expected to port.
-     * @param servicesOrdered the stevedore services that have been ordered.
-     * @param berth the berth the ship is porting to.
+
      */
-    public StevedoreService(
-            LocalDate dayOfArrival,
-            StevedoreServicesOrdered servicesOrdered,
-            Berth berth,
-            IServiceCaller serviceCaller)
+    public StevedoreService(IServiceCaller serviceCaller)
     {
-        this.dayOfArrival = dayOfArrival;
-        this.servicesOrdered = servicesOrdered;
-        this.berth = berth;
         this.serviceCaller = serviceCaller;
     }
 
@@ -55,11 +31,14 @@ public class StevedoreService implements IStevedoreService
      * @return the string result from the post request.
      * @throws IOException IO exception thrown if the URL cannot find the endpoint.
      * @param url the url to call the service with.
+     * @param dayOfArrival the day the ship is expected to port.
+     * @param servicesOrdered the stevedore services that have been ordered.
+     * @param berth the berth the ship is porting to.
      */
     @Override
-    public Receipt orderStevedore(URL url) throws IOException
+    public Receipt orderStevedore(URL url, LocalDate dayOfArrival, StevedoreServicesOrdered servicesOrdered, Berth berth) throws IOException
     {
-        var dto = new StevedoreDto(this.dayOfArrival.toString(), this.servicesOrdered, this.berth);
+        var dto = new StevedoreDto(dayOfArrival.toString(), servicesOrdered, berth);
         var json = JsonParser.StevedoreDtoToJson(dto);
         var response = this.serviceCaller.postRequest(url, json);
         return JsonParser.parseJsonToReceipt(response);

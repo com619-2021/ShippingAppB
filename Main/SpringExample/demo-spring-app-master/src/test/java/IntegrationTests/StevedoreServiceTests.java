@@ -29,8 +29,8 @@ public class StevedoreServiceTests
         var berth = new Berth(uuid);
         var serviceCaller = Mockito.mock(IServiceCaller.class);
         when(serviceCaller.postRequest(any(), anyString())).thenReturn("{\"uuid\": \"1-1-1-1\", \"totalPrice\": 45.6}");
-        var stevedoreService = new StevedoreService(dayOfArrival, servicesOrdered, berth, serviceCaller);
-        var result = stevedoreService.orderStevedore(new URL("wibble"));
+        var stevedoreService = new StevedoreService(serviceCaller);
+        var result = stevedoreService.orderStevedore(new URL("wibble"),dayOfArrival, servicesOrdered, berth);
 
         Assert.isTrue(result.getClass() == Receipt.class, "The actual class was: " + result.getClass());
     }
