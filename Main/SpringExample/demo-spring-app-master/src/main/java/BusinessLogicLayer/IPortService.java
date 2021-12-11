@@ -12,6 +12,9 @@ public interface IPortService
 {
     /**
      * Gets the availability of the port.
+     * @param ship the ship to book.
+     * @param dayOfArrival the day the ship is intended to dock.
+     * @param url the url for the request to go to.
      * @return the string representation of the availability of the port.
      * @throws IllegalArgumentException when the params cannot be converted to strings
      * @throws IOException occurs if the connection is not

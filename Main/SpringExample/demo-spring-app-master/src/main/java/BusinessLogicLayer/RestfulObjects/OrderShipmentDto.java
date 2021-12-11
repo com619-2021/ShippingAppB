@@ -44,8 +44,8 @@ public class OrderShipmentDto
     public OrderShipmentDto(ShipType shipType,
                             StevedoreServicesOrdered stevedoreServices,
                             boolean usingTeuContainers,
-                            double numberOfContainers,
-                            double numberOfPassengers,
+                            int numberOfContainers,
+                            int numberOfPassengers,
                             String dayOfArrival)
     {
         this.shipType = shipType;
