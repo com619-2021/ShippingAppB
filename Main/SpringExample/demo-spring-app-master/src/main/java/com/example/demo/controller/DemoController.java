@@ -5,13 +5,9 @@ import RestfulComms.ServiceCaller;
 import com.example.demo.dto.Demo;
 import com.example.demo.dto.Result;
 import com.example.demo.repository.DemoRepository;
-import io.swagger.v3.core.util.Json;
 import lombok.extern.java.Log;
-import org.apache.commons.lang3.NotImplementedException;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
-import java.text.MessageFormat;
 import java.util.Optional;
 
 @RestController
@@ -68,7 +64,7 @@ public class DemoController {
             var stevedoreService = new StevedoreService(serviceCaller);
 
             var orderShipment = new OrderShipment(shipmentDetails, portService, harbourService, stevedoreService, urlConfig);
-            var result = orderShipment.PlaceOrder();
+            var result = orderShipment.placeOrder();
 
             return result;
         }
