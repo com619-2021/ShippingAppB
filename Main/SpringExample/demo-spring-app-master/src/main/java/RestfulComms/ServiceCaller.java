@@ -1,4 +1,4 @@
-package ServiceRequestor;
+package RestfulComms;
 
 import com.sun.istack.logging.Logger;
 
@@ -14,27 +14,13 @@ public class ServiceCaller implements IServiceCaller
     private Logger logger = Logger.getLogger(ServiceCaller.class);
 
     /**
-     * the url to communicate to
-     */
-    private final URL url;
-
-    /**
-     * Initializes a new instance of the ServiceCaller class.
-     * @param url the url to communicate over.
-     */
-    public ServiceCaller(URL url)
-    {
-        this.url = url;
-    }
-
-    /**
      * This sends a get request to the provided url
      * @param parameters the parameters for the rest request.
      * @return the result of the get request.
      * @throws IOException throws if connection cannot be created.
      */
     @Override
-    public String getRequest(String parameters) throws IOException
+    public String getRequest(URL url, String parameters) throws IOException
     {
         var httpConnectionHandler = new HttpConnectionHandler(url);
         var contentType = "application.json";
@@ -55,7 +41,7 @@ public class ServiceCaller implements IServiceCaller
      * @throws IOException url may not be correct
      */
     @Override
-    public String postRequest(String parameters) throws IOException
+    public String postRequest(URL url, String parameters) throws IOException
     {
         var httpConnectionHandler = new HttpConnectionHandler(url);
         var contentType = "application.json";

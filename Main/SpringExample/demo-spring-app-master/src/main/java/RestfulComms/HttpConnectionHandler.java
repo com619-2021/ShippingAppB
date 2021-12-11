@@ -1,4 +1,4 @@
-package ServiceRequestor;
+package RestfulComms;
 
 
 import org.jboss.logging.Logger;

@@ -2,7 +2,7 @@
 
 ## GitHub action overall results
 
-![Build Project](https://github.com/com619-2021/ShippingAppB/actions/workflows/build.yml/badge.svg)
+- ![Build Project](https://github.com/com619-2021/ShippingAppB/actions/workflows/build.yml/badge.svg)
 
 ## Main readme
 

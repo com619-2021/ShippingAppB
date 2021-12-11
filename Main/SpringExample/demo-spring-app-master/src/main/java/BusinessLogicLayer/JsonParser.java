@@ -2,6 +2,7 @@ package BusinessLogicLayer;
 
 import BusinessLogicLayer.RestfulObjects.*;
 import com.google.gson.Gson;
+import org.apache.commons.lang3.NotImplementedException;
 
 import java.io.File;
 import java.io.IOException;
@@ -95,5 +96,15 @@ public class JsonParser
     {
         var gson = new Gson();
         return gson.toJson(dto);
+    }
+
+    /**]
+     * Converts shipment order json to object
+     * @param json the string to convert
+     */
+    public static OrderShipmentDto GetShipmentDetails(String json)
+    {
+        var gson = new Gson();
+        return gson.fromJson(json, OrderShipmentDto.class);
     }
 }
