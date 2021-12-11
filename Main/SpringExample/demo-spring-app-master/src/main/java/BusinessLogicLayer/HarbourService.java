@@ -10,21 +10,6 @@ import java.time.LocalDate;
 public class HarbourService implements IHarbourService
 {
     /**
-     * The ship the pilot needs to pilot.
-     */
-    private Ship ship;
-
-    /**
-     * The day the ship is expected to port.
-     */
-    private LocalDate dayOfArrival;
-
-    /**
-     * The details of berth to port into.
-     */
-    private Berth berth;
-
-    /**
      * the service caller for the REST comms
      */
     private final IServiceCaller serviceCaller;
@@ -50,11 +35,8 @@ public class HarbourService implements IHarbourService
     @Override
     public boolean getPilotAvailabilities(URL url, Ship ship, Berth berth, LocalDate dateOfArrival) throws IOException
     {
-        this.ship = ship;
-        this.berth = berth;
-        this.dayOfArrival = dateOfArrival;
-        var shipDto = new CheckPilotAvailableShip(this.ship.getDraft(), this.ship.getType());
-        var dto = new CheckPilotAvailable(this.dayOfArrival.toString(), shipDto);
+        var shipDto = new CheckPilotAvailableShip(ship.getDraft(), ship.getType());
+        var dto = new CheckPilotAvailable(dateOfArrival.toString(), shipDto);
         var params = JsonParser.parsePilotAvailabilityDtoToJson(dto);
         var result = this.serviceCaller.getRequest(url, params);
         var response = JsonParser.parseJsonToPilotAvailability(result);
@@ -66,11 +48,14 @@ public class HarbourService implements IHarbourService
      * @return the receipt from the harbour service in string representation
      * @throws IOException thrown if connection cannot be established
      * @param url the url to call the service with.
+     * @param ship the ship that is due to arrive.
+     * @param berth the berth to port in.
+     * @param dayOfArrival the day the ship is expected.
      */
     @Override
-    public Receipt postPilotOrder(URL url) throws IOException
+    public Receipt postPilotOrder(URL url, Ship ship, Berth berth, LocalDate dayOfArrival) throws IOException
     {
-        var dto = new BookPilotDto(dayOfArrival, this.ship, this.berth);
+        var dto = new BookPilotDto(dayOfArrival, ship, berth);
         var params = JsonParser.parseBookPilotDtoToJson(dto);
         var receipt = this.serviceCaller.postRequest(url, params);
         return JsonParser.parseJsonToReceipt(receipt);

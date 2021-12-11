@@ -76,7 +76,7 @@ public class OrderShipment
         var url = new URL(this.urlConfig.getOrderPortUrl());
         var dayOfBooking = LocalDate.parse(this.orderShipmentDto.getDayOfArrival());
         var berthReceipt = this.portService.orderPort(berth.getBerthId(), dayOfBooking, url);
-        var pilotReceipt = this.harbourService.postPilotOrder(new URL(urlConfig.getOrderPilotUrl()));
+        var pilotReceipt = this.harbourService.postPilotOrder(new URL(urlConfig.getOrderPilotUrl()),ship ,berth , dateOfArrival);
         var total = stevedoreReceipt.getTotalPrice() + berthReceipt.getTotalPrice() + pilotReceipt.getTotalPrice();
         return "" + total;
     }

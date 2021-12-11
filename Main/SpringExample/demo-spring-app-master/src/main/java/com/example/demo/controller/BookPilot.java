@@ -28,7 +28,7 @@ public class BookPilot
                 return "Error";
             }
 
-            var order = harbourService.postPilotOrder(new URL(urls.getOrderPilotUrl()));
+            var order = harbourService.postPilotOrder(new URL(urls.getOrderPilotUrl()),ship ,berth , LocalDate.now());
             return ""+order.getTotalPrice();
         }
         catch (Exception e)

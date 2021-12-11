@@ -12,5 +12,5 @@ public interface IHarbourService
 {
     boolean getPilotAvailabilities(URL url, Ship ship, Berth berth, LocalDate dateOfArrival) throws IOException;
 
-    Receipt postPilotOrder(URL url) throws IOException;
+    Receipt postPilotOrder(URL url, Ship ship, Berth berth, LocalDate dayOfArrival) throws IOException;
 }

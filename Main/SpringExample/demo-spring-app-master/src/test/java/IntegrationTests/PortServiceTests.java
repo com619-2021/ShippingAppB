@@ -29,7 +29,7 @@ public class PortServiceTests
         var uuid = UUID.randomUUID();
         var serviceCaller = Mockito.mock(IServiceCaller.class);
         var url = Mockito.mock(UrlConfig.class);
-        when(url.getRequestPortUrl()).thenReturn("wibble");
+        when(url.getRequestPortUrl()).thenReturn("http:/wibble/");
         var ship = new Ship(789.2,456.2,321, uuid, ShipType.FERRY);
         var portService = new PortService(serviceCaller);
         when(serviceCaller.getRequest(any(), anyString())).thenReturn("[0, 1, 2]");
@@ -43,7 +43,7 @@ public class PortServiceTests
         var serviceCaller = Mockito.mock(IServiceCaller.class);
         when(serviceCaller.postRequest(any(), anyString())).thenReturn("{\"uuid\": \"1-1-1-1\", \"totalPrice\": 45.6}");
         var url = Mockito.mock(UrlConfig.class);
-        when(url.getOrderPortUrl()).thenReturn("wibble");
+        when(url.getOrderPortUrl()).thenReturn("http:/wibble/");
         var portService = new PortService(serviceCaller);
         var actual = portService.orderPort(UUID.randomUUID().toString(), LocalDate.parse("2021-05-09"), new URL(url.getOrderPortUrl()));
         Assert.isTrue(actual.getClass() == Receipt.class, "the actual class was: "+actual.getClass());
