@@ -21,8 +21,8 @@ public class BookPilot
             var ship = new Ship(254.7, 235.67, 346, UUID.randomUUID(), ShipType.FERRY);
             var berth = new Berth(UUID.randomUUID().toString());
             var serviceCaller = new ServiceCaller();
-            var harbourService = new HarbourService(ship, berth, LocalDate.now(), serviceCaller);
-            var result = harbourService.getPilotAvailabilities(new URL(urls.getPilotAvailabilityUrl()));
+            var harbourService = new HarbourService(serviceCaller);
+            var result = harbourService.getPilotAvailabilities(new URL(urls.getPilotAvailabilityUrl()), ship, berth, LocalDate.now());
             if (!result)
             {
                 return "Error";

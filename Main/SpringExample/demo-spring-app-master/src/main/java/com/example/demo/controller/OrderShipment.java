@@ -61,7 +61,7 @@ public class OrderShipment
 
         var berth = new Berth(berths.get(0));
 
-        var pilotAvailable = this.harbourService.getPilotAvailabilities(new URL(urlConfig.getPilotAvailabilityUrl()));
+        var pilotAvailable = this.harbourService.getPilotAvailabilities(new URL(urlConfig.getPilotAvailabilityUrl()),ship ,berth , dateOfArrival);
 
         if(!pilotAvailable)
         {

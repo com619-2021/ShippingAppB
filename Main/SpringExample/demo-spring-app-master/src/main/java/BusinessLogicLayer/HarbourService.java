@@ -12,17 +12,17 @@ public class HarbourService implements IHarbourService
     /**
      * The ship the pilot needs to pilot.
      */
-    private final Ship ship;
+    private Ship ship;
 
     /**
      * The day the ship is expected to port.
      */
-    private final LocalDate dayOfArrival;
+    private LocalDate dayOfArrival;
 
     /**
      * The details of berth to port into.
      */
-    private final Berth berth;
+    private Berth berth;
 
     /**
      * the service caller for the REST comms
@@ -31,16 +31,10 @@ public class HarbourService implements IHarbourService
 
     /**
      * Initializes a new instance of the HarbourService
-     * @param ship the ship that is due to arrive.
-     * @param berth the berth to port in.
-     * @param dayOfShipArrival the day the ship is expected.
      * @param serviceCaller the object used to comms using ReST.
      */
-    public HarbourService(Ship ship, Berth berth, LocalDate dayOfShipArrival, IServiceCaller serviceCaller)
+    public HarbourService(IServiceCaller serviceCaller)
     {
-        this.ship = ship;
-        this.dayOfArrival = dayOfShipArrival;
-        this.berth = berth;
         this.serviceCaller = serviceCaller;
     }
 
@@ -49,10 +43,16 @@ public class HarbourService implements IHarbourService
      * @return if there are pilots available.
      * @throws IOException If the ReST comms do not work IO Exception thrown.
      * @param url the url to call the service with.
+     * @param ship the ship that is due to arrive.
+     * @param berth the berth to port in.
+     * @param dateOfArrival the day the ship is expected.
      */
     @Override
-    public boolean getPilotAvailabilities(URL url) throws IOException
+    public boolean getPilotAvailabilities(URL url, Ship ship, Berth berth, LocalDate dateOfArrival) throws IOException
     {
+        this.ship = ship;
+        this.berth = berth;
+        this.dayOfArrival = dateOfArrival;
         var shipDto = new CheckPilotAvailableShip(this.ship.getDraft(), this.ship.getType());
         var dto = new CheckPilotAvailable(this.dayOfArrival.toString(), shipDto);
         var params = JsonParser.parsePilotAvailabilityDtoToJson(dto);
