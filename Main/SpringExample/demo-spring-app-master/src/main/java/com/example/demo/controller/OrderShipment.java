@@ -47,7 +47,7 @@ public class OrderShipment
         this.urlConfig = urlConfig;
     }
 
-    private String PlaceOrder() throws Exception
+    public String PlaceOrder() throws Exception
     {
         var ship = this.chooseShip();
         var getBerthAvailabilityUrl = new URL(this.urlConfig.getRequestPortUrl());

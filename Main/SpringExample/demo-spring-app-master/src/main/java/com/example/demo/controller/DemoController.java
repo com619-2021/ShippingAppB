@@ -68,7 +68,10 @@ public class DemoController {
             var harbourService = new HarbourService(serviceCaller);
             var stevedoreService = new StevedoreService(serviceCaller);
 
-            throw new NotImplementedException();
+            var orderShipment = new OrderShipment(shipmentDetails, portService, harbourService, stevedoreService, this.urlConfig);
+            var result = orderShipment.PlaceOrder();
+
+            return result;
         }
         catch(Exception e)
         {
