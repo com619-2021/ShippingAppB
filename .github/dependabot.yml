@@ -8,7 +8,7 @@
 version: 2
 updates:
   - package-ecosystem: "maven" # See documentation for possible values
-    directory: "/experimental/portappb/" # Location of package manifests
+    directory: "/Main/SpringExample/demo-spring-app-master/" # Location of package manifests
     schedule:
       interval: "daily"
 
@@ -18,7 +18,7 @@ updates:
       interval: "daily"
 
   - package-ecosystem: "npm" # Maintain dependencies for npm
-    directory: "/experimental/portappb/"
+    directory: "/Main/SpringExample/demo-spring-app-master/"
     schedule:
       interval: "daily"
       
