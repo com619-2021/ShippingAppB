@@ -16,7 +16,7 @@ public class OrderController {
     }
 
     @GetMapping
-    public String getOrders(){
+    public Order getOrders(){
         return orderService.hi();
     }
 }

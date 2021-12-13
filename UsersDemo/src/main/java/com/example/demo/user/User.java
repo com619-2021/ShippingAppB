@@ -3,21 +3,23 @@ package com.example.demo.user;
 import javax.persistence.*;
 
 @Entity
-@Table
+//@Table
 public class User {
+    
     @Id
-    @SequenceGenerator(
-            name="user_sequence",
-            sequenceName = "user_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "user_sequence"
-    )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @SequenceGenerator(
+//            name="user_sequence",
+//            sequenceName = "user_sequence",
+//            allocationSize = 1
+//    )
+//    @GeneratedValue(
+//            strategy = GenerationType.SEQUENCE,
+//            generator = "user_sequence"
+//    )
     private Long id;
-    private String Name;
-    private String Role;
+    private String name;
+    private String role;
     private String pswd;
 
     public User() {
@@ -25,14 +27,14 @@ public class User {
 
     public User(Long id, String name, String role, String pswd) {
         this.id = id;
-        Name = name;
-        Role = role;
+        this.name = name;
+        this.role = role;
         this.pswd = pswd;
     }
 
     public User(String name, String role, String pswd) {
-        Name = name;
-        Role = role;
+        this.name = name;
+        this.role = role;
         this.pswd = pswd;
     }
 
@@ -40,25 +42,43 @@ public class User {
         return id;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", Name='" + Name + '\'' +
-                ", Role='" + Role + '\'' +
-                ", pswd='" + pswd + '\'' +
-                '}';
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
-        return Name;
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getRole() {
-        return Role;
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public String getPswd() {
         return pswd;
     }
+
+    public void setPswd(String pswd) {
+        this.pswd = pswd;
+    }
+
+   @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", Name='" + name + '\'' +
+                ", Role='" + role + '\'' +
+                ", pswd='" + pswd + '\'' +
+                '}';
+    }
+    
+    
 }

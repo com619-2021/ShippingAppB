@@ -28,8 +28,9 @@ public class UserService {
         Optional<User> tempuser=userRepository.findUserByCred(user.getPswd(), user.getName());
         if(tempuser.isPresent() ){
             //WRITE HERE HANDLING IF USER IS ALREADY IN THE SYSTEM
+        } else {
+       userRepository.save(user);
         }
-       userRepository.save(tempuser);
         System.out.println("test");
     }
 

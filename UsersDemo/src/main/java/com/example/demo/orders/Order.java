@@ -5,23 +5,25 @@ import java.time.LocalDate;
 import javax.persistence.*;
 
 @Entity
-@Table
+//@Table
 public class Order {
+
     @Id
-    @SequenceGenerator(
-            name = "user_sequence",
-            sequenceName = "user_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "user_sequence"
-    )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @SequenceGenerator(
+//            name = "user_sequence",
+//            sequenceName = "user_sequence",
+//            allocationSize = 1
+//    )
+//    @GeneratedValue(
+//            strategy = GenerationType.SEQUENCE,
+//            generator = "user_sequence"
+//    )
     private Long id;
     private LocalDate date;
-    private double width;
-    private double height;
-    private double draft;
+    private Double width;
+    private Double  height;
+    private Double  draft;
     private String type;
 
     public Order(LocalDate date, double width, double height, double draft, String type) {
@@ -36,23 +38,55 @@ public class Order {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public LocalDate getDate() {
         return date;
     }
 
-    public double getWidth() {
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public Double getWidth() {
         return width;
     }
 
-    public double getHeight() {
+    public void setWidth(Double width) {
+        this.width = width;
+    }
+
+    public Double getHeight() {
         return height;
     }
 
-    public double getDraft() {
+    public void setHeight(Double height) {
+        this.height = height;
+    }
+
+    public Double getDraft() {
         return draft;
+    }
+
+    public void setDraft(Double draft) {
+        this.draft = draft;
     }
 
     public String getType() {
         return type;
     }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+
+
+    @Override
+    public String toString() {
+        return "Order{" + "id=" + id + ", date=" + date + ", width=" + width + ", height=" + height + ", draft=" + draft + ", type=" + type + '}';
+    }
+
 }
