@@ -22,16 +22,14 @@ public class UserService {
 
 
 
-    public String hi(){
-        User a=new User("Ivan","petkov","sth","123");
-        return a.toString();
-    }
+
 
     public void addUser(User user) {
-        Optional<User> tempuser=userRepository.findUserByCred(user.getPswd(), user.getSName());
+        Optional<User> tempuser=userRepository.findUserByCred(user.getPswd(), user.getName());
         if(tempuser.isPresent() ){
-            //WRITE HERE
+            //WRITE HERE HANDLING IF USER IS ALREADY IN THE SYSTEM
         }
+       userRepository.save(tempuser);
         System.out.println("test");
     }
 
@@ -39,7 +37,5 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    public void deleteUserByName(String fName, String lName){
-        userRepository.deleteByName(fName,lName);
-    }
+
 }

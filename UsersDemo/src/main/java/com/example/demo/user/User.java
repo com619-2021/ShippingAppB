@@ -16,48 +16,42 @@ public class User {
             generator = "user_sequence"
     )
     private Long id;
-    private String FName;
-    private String SName;
+    private String Name;
     private String Role;
     private String pswd;
 
-    public User(String FName, String SName, String role, String pswd) {
-        this.FName = FName;
-        this.SName = SName;
-        Role = role;
-        this.pswd = pswd;
+    public User() {
     }
 
-    public void setId(long id) {
+    public User(Long id, String name, String role, String pswd) {
         this.id = id;
-    }
-
-    public void setFName(String FName) {
-        this.FName = FName;
-    }
-
-    public void setSName(String SName) {
-        this.SName = SName;
-    }
-
-    public void setRole(String role) {
+        Name = name;
         Role = role;
-    }
-
-    public void setPswd(String pswd) {
         this.pswd = pswd;
     }
 
-    public long getId() {
+    public User(String name, String role, String pswd) {
+        Name = name;
+        Role = role;
+        this.pswd = pswd;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public String getFName() {
-        return FName;
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", Name='" + Name + '\'' +
+                ", Role='" + Role + '\'' +
+                ", pswd='" + pswd + '\'' +
+                '}';
     }
 
-    public String getSName() {
-        return SName;
+    public String getName() {
+        return Name;
     }
 
     public String getRole() {
@@ -66,16 +60,5 @@ public class User {
 
     public String getPswd() {
         return pswd;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", FName='" + FName + '\'' +
-                ", SName='" + SName + '\'' +
-                ", Role='" + Role + '\'' +
-                ", pswd='" + pswd + '\'' +
-                '}';
     }
 }

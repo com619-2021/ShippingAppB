@@ -13,10 +13,6 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping
-    public String getUsers(){
-        return userService.hi();
-    }
 
     @PostMapping
     public void registerNewUser(@RequestBody User user){
@@ -28,8 +24,5 @@ public class UserController {
         userService.deleteUser(id);
     }
 
-    @DeleteMapping(path="{fname,lname}")
-    public void deleteUserByName(@PathVariable("fname") String fname,@PathVariable("lname") String lname){
-        userService.deleteUserByName(fname,lname);
-    }
+
 }
