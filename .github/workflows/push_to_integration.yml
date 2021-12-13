@@ -35,7 +35,7 @@ jobs:
         working-directory: ./Main/SpringExample/demo-spring-app-master/
         run: |
           mvn --batch-mode clean compile jib:dockerBuild -Pproduction
-          docker tag shipping-app-b:latest ghcr.io/${{ github.repository_owner }}/shipping-app-b:${{ env.RELEASE_VERSION }}
+          docker tag shippingappb:latest ghcr.io/${{ github.repository_owner }}/shipping-app-b:${{ env.RELEASE_VERSION }}
           docker push ghcr.io/${{ github.repository_owner }}/shipping-app-b:${{ env.RELEASE_VERSION }}
       - name: Send Deploy Notification to Integration Repo
         uses: peter-evans/repository-dispatch@v1
