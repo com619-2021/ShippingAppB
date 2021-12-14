@@ -13,6 +13,11 @@ public class UserController {
         this.userService = userService;
     }
 
+    @GetMapping
+    public String hi(){
+        return "hi";
+    }
+
 
     @PostMapping
     public void registerNewUser(@RequestBody User user){
