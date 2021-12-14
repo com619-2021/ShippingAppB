@@ -9,7 +9,7 @@ import java.io.File;
 
 @OpenAPIDefinition( 
     servers = {
-       @Server(url = "/", description = "Default Server URL")
+       @Server(url = "/shipping/", description = "Default Server URL")
     }
 ) 
 @SpringBootApplication
